@@ -6,5 +6,5 @@ def test_connection(df_file):
 
 
 if __name__ == "__main__":
-    df_file = "database.sqlite3"
+    df_file = r"C:\Users\ajayj\DehumGraph\database.sqlite3"
     test_connection(df_file)
