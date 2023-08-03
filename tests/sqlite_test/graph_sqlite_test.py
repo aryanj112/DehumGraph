@@ -1,11 +1,15 @@
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import matplotlib as mpl
 from dateutil import parser
 import sqlite3
 
-#Used to make the graph look better
+#styling
 from matplotlib import style
 style.use('fivethirtyeight')
+mpl.rcParams['lines.linewidth'] = 2
+mpl.rcParams['lines.linestyle'] = '--'
+mpl.rcParams['lines.markersize'] = 2
 
 def graph_data(df_file,table_name,col_x,col_y):
     conn = sqlite3.connect(df_file)
@@ -21,6 +25,16 @@ def graph_data(df_file,table_name,col_x,col_y):
         temp.append(row[1])
 
     plt.plot_date(dates,temp,'-')
+    plt.xticks(rotation=45)  # Rotate x-axis labels for better visibility
+    
+    plt.xlabel("Time")
+    plt.ylabel("Watt hrs")
+    plt.title("Time vs. Watt hrs (Solaredge)") #Pepco
+
+    #plt.xlabel("Date")
+    #plt.ylabel("Temperature")
+    #plt.title("Date vs. Temperature")
+
     plt.show()
     
     conn.close()
