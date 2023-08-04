@@ -3,8 +3,9 @@ import matplotlib.dates as mdates
 import matplotlib as mpl
 import pandas as pd
 
-dehum = pd.read_csv("dehumidifer_full_data.csv")
-weather = pd.read_csv("result/weather.csv")
+
+dehum = pd.read_csv("data/dehumidifer_full_data.csv")
+weather = pd.read_csv("data/result/weather.csv")
 
 # Convert "Start Date" to datetime objects
 dehum["Start Date"] = pd.to_datetime(dehum["Start Date"])

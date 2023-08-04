@@ -42,7 +42,7 @@ def graph_data(df_file,table_name,col_x,col_y):
 
 if __name__ == "__main__":
     df_file = r"C:\Users\ajayj\DehumGraph\database.sqlite3"
-    table_name = "solaredge"
-    col_x = "time"
-    col_y = "watt_hrs"
+    table_name = "weather"
+    col_x = "date"
+    col_y = "temperature"
     graph_data(df_file,table_name,col_x,col_y)
