@@ -1,15 +1,16 @@
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
-from cycler import cycler
 
 dehum = pd.read_csv("dehumidifer_full_data.csv")
 
 #Converting to date
+'''
 try:
     dehum['Start Date'] = pd.to_datetime(dehum['Start Date'], format=r'%m/%d/%y')
 except ValueError:
     dehum['Start Date'] = pd.NaT
+'''
 
 mpl.rcParams['lines.linewidth'] = 2
 mpl.rcParams['lines.linestyle'] = '--'
