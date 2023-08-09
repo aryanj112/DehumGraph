@@ -6,7 +6,7 @@ from matplotlib.ticker import MaxNLocator
 #Read data
 dehum = pd.read_csv("data/dehumidifer_full_data.csv")
 weather = pd.read_csv("data/netzero/weather_file.csv")
-ambient = pd.read_csv("data/ambient_weather/2023CH1A_use.csv")
+ambient = pd.read_csv("data/ambient_weather/ambient_combine_data.csv")
 #2021CH1A_use
 #ambient_combine_data
 
@@ -27,7 +27,7 @@ ax1.xaxis.set_major_locator(mdates.YearLocator())
 ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))  # Format as year
 
 #Plot first variable
-ax1.plot(dehum["Start Date"],dehum["L/kWh"], label = "Efficiency", color = "tab:blue")
+ax1.plot(dehum["Start Date"],dehum["L/kWh"], 'o', label = "Efficiency", color = "tab:blue")
 ax1.set_xlabel("Date")
 ax1.set_ylabel("Efficiency", color = "tab:blue")
 
@@ -50,6 +50,6 @@ ax2.legend(loc = "upper left",bbox_to_anchor=(0,0.93))
 ax3.legend(loc = "upper left",bbox_to_anchor=(0,.87))
 
 #Title and end
-plt.title("Figure it out")
+plt.title("Efficiency, Humidity, and Temperature")
 fig.tight_layout()
 plt.show()
