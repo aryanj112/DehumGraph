@@ -6,7 +6,7 @@ from matplotlib.ticker import MaxNLocator
 #Read data
 dehum = pd.read_csv("data/dehumidifer_full_data.csv")
 weather = pd.read_csv("data/netzero/weather_file.csv")
-ambient = pd.read_csv("data/ambient_weather/ambient_combine_data.csv")
+ambient = pd.read_csv("data/ambient_weather/ambient_CH1A_combine.csv")
 #2021CH1A_use
 #ambient_combine_data
 
@@ -46,8 +46,8 @@ ax3.set_ylabel("Humidity(%)", color = "tab:purple")
 
 #Show Legend
 ax1.legend(loc = "upper left")
-ax2.legend(loc = "upper left",bbox_to_anchor=(0,0.93))
-ax3.legend(loc = "upper left",bbox_to_anchor=(0,.87))
+ax2.legend(loc = "upper left",bbox_to_anchor=(0,0.96))
+ax3.legend(loc = "upper left",bbox_to_anchor=(0,.92))
 
 #Title and end
 plt.title("Efficiency, Humidity, and Temperature")
