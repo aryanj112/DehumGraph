@@ -5,8 +5,8 @@ import pandas as pd
 dehum = pd.read_csv("data/dehumidifer_full_data.csv")
 weather = pd.read_csv("data/netzero/weather_file.csv")
 
-#dehum["Start Date"] = pd.to_datetime(dehum["Start Date"]) # Convert dehum date to datetime
-#weather["date"] = pd.to_datetime(weather["date"])  # Convert weather date to datetime
+dehum["Start Date"] = pd.to_datetime(dehum["Start Date"]) # Convert dehum date to datetime
+weather["date"] = pd.to_datetime(weather["date"])  # Convert weather date to datetime
 
 # Filter data to start from 2019
 dehum = dehum[dehum["Start Date"] >= "2021-01-01"]
