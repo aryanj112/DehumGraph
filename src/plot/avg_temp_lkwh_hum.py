@@ -48,14 +48,18 @@ ax2 = ax1.twinx()
 ax2.plot(daily_avg_temp.index, daily_avg_temp.values, '-', label="Avg Temperature", color="tab:red")
 ax2.set_ylabel("Avg Temperature (°C)", color="tab:red")
 
-# Plot daily average humidity on the right y-axis
-ax2.plot(daily_avg_humidity.index, daily_avg_humidity.values, '-', label="Avg Humidity (%)", color="tab:purple")
-ax2.set_ylabel("Avg Humidity (%)", color="tab:purple")
+# Create a third y-axis for average humidity
+ax3 = ax1.twinx()
+ax3.spines['right'].set_position(('outward', 80))
+ax3.yaxis.set_major_locator(MaxNLocator(integer=True, nbins=15))
+ax3.plot(daily_avg_humidity.index, daily_avg_humidity.values, '-', label="Avg Humidity (%)", color="tab:purple")
+ax3.set_ylabel("Avg Humidity (%)", color="tab:purple")
 
 # Show Legend
-lines1, labels1 = ax1.get_legend_handles_labels()
+lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-ax1.legend(lines1 + lines2, labels1 + labels2, loc="upper left")
+lines3, labels3 = ax3.get_legend_handles_labels()
+ax1.legend(lines + lines2+lines3, labels + labels2 + labels3, loc="upper left")
 
 # Title and end
 plt.title("Efficiency, Avg Humidity, and Avg Temperature")
