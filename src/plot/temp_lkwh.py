@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
 
-dehum = pd.read_csv("data/dehumidifer_full_data.csv")
-weather = pd.read_csv("data/netzero/weather_file.csv")
+# Read data
+dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\dehumidifer_full_data.csv")
+weather = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\netzero\weather_file.csv")
 
 dehum["Start Date"] = pd.to_datetime(dehum["Start Date"]) # Convert dehum date to datetime
 weather["date"] = pd.to_datetime(weather["date"])  # Convert weather date to datetime

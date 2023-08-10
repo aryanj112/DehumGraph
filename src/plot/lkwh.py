@@ -14,9 +14,8 @@ dehum = dehum[dehum["Start Date"] >= "2021-01-01"]
 
 fig, ax1 = plt.subplots()
 
-ax1.set_ylim(0, 2) 
-
 #Plot First Variable
+#ax1.set_ylim(0, 2) 
 ax1.plot(dehum["Start Date"],dehum["L/kWh"], label = "Efficiency", color = "tab:blue")
 ax1.set_xlabel("Date")
 ax1.set_ylabel("Efficiency", color = "tab:blue")

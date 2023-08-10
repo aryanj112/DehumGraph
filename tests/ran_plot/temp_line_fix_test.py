@@ -14,7 +14,7 @@ weather["date"] = pd.to_datetime(weather["date"])
 ambient["Time"] = pd.to_datetime(ambient["Time"])
 
 # Filter data start and end time
-start_date = pd.to_datetime("2019-01-01")
+start_date = pd.to_datetime("2021-01-01")
 end_date = pd.to_datetime("2023-08-08") 
 dehum = dehum[dehum["Start Date"].between(start_date, end_date)]
 weather = weather[weather["date"].between(start_date, end_date)]
