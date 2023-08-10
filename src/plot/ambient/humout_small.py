@@ -19,7 +19,9 @@ ambient["Date"] = ambient["Time"].dt.date
 daily_avg_temp = ambient.groupby("Date")["Temperature(F)"].mean()
 
 # Filter data to start from 2023-06-18
-ambient = ambient[ambient["Time"] >= "2023-06-18"]
+start_date = pd.to_datetime("2023-06-18").date()  # Convert to datetime.date
+end_date = pd.to_datetime("2023-08-08").date()  # Convert to datetime.date
+daily_avg_temp = daily_avg_temp.loc[start_date:end_date]
 
 # Create a figure and plot
 fig, ax1 = plt.subplots()
@@ -29,7 +31,7 @@ ax1.set_xlabel("Date")
 ax1.set_ylabel("Temperature(F)", color="tab:red")
 
 # Set the x-axis to show months and days
-ax1.xaxis.set_major_locator(mdates.DayLocator(interval=7))  # Show ticks every 7 days
+ax1.xaxis.set_major_locator(mdates.DayLocator(interval=14))  # Show ticks every 14 days
 ax1.xaxis.set_major_formatter(mdates.DateFormatter("%b %d"))  # Format as month abbreviation and day
 
 # Show Legend
