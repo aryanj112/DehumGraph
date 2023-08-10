@@ -1,3 +1,6 @@
+# Plotting file that graphs temperature and l/kWh agaisnt time
+# NetZero -> Temperature # Dehumidifier Data -> L/kWh
+
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
@@ -9,8 +12,8 @@ dehum["Start Date"] = pd.to_datetime(dehum["Start Date"]) # Convert dehum date t
 weather["date"] = pd.to_datetime(weather["date"])  # Convert weather date to datetime
 
 # Filter data to start from 2019
-#dehum = dehum[dehum["Start Date"] >= "2021-01-01"]
-#weather = weather[weather["date"] >= "2021-01-01"]
+dehum = dehum[dehum["Start Date"] >= "2021-01-01"]
+weather = weather[weather["date"] >= "2021-01-01"]
 
 fig, ax1 = plt.subplots()
 ax2 = ax1.twinx()

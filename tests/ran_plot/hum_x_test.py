@@ -1,6 +1,3 @@
-# Plotting file that graphs temperature, l/kWh, and humidity all agaisnt time
-# NetZero -> Temperature # Dehumidifier Data -> L/kWh # Ambient Weather -> Humidity
-
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
@@ -38,17 +35,16 @@ ax2 = ax1.twinx()
 ax2.plot(weather["date"], weather["temperature"], 'o', label="Temperature", color="tab:red")
 ax2.set_ylabel("Temperature (°C)", color="tab:red")
 
-# Create a third y-axis for humidity
-ax3 = ax1.twinx()
-ax3.spines['right'].set_position(('outward', 80))
-ax3.yaxis.set_major_locator(MaxNLocator(integer=True, nbins=15))
-ax3.plot(ambient["Time"], ambient["Humidity(%)"], '-', label="Humidity (%)", color="tab:purple")
-ax3.set_ylabel("Humidity (%)", color="tab:purple")
+# Plot humidity data directly on the primary y-axis (ax1)
+ax1.plot(ambient["Time"], ambient["Humidity(%)"], '-', label="Humidity (%)", color="tab:purple")
+ax1.set_ylabel("Humidity (%)", color="tab:purple")
 
-# Show Legend
-lines, labels = ax1.get_legend_handles_labels()
+# Combine the legends from all y-axes
+lines1, labels1 = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-ax2.legend(lines + lines2, labels + labels2, loc="upper left", bbox_to_anchor=(0, 0.96))
+all_lines = lines1 + lines2
+all_labels = labels1 + labels2
+ax1.legend(all_lines, all_labels, loc="upper left", bbox_to_anchor=(0, 1.0))
 
 # Title and end
 plt.title("Efficiency, Humidity, and Temperature")
