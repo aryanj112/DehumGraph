@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
 
-dehum = pd.read_csv("dehumidifer_full_data.csv")
+dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\dehumidifer_full_data.csv")
 
 #Converting to date
 '''

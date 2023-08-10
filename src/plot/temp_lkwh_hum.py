@@ -50,7 +50,6 @@ ax3.set_ylabel("Humidity (%)", color="tab:purple")
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
 lines3, labels3 = ax3.get_legend_handles_labels()
-
 ax1.legend(lines + lines2+lines3, labels + labels2 + labels3, loc="upper left")
 
 # Title and end
