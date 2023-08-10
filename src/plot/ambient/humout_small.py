@@ -20,13 +20,16 @@ daily_avg_temp = ambient.groupby("Date")["Temperature(F)"].mean()
 
 # Filter data to start from 2023-06-18
 start_date = pd.to_datetime("2023-06-18").date()  # Convert to datetime.date
-end_date = pd.to_datetime("2023-08-08").date()  # Convert to datetime.date
+end_date = pd.to_datetime("2023-06-19").date()  # Convert to datetime.date
 daily_avg_temp = daily_avg_temp.loc[start_date:end_date]
+ambient = ambient[ambient["Time"].between(start_date, end_date)]
 
 # Create a figure and plot
 fig, ax1 = plt.subplots()
 
-ax1.plot(daily_avg_temp.index, daily_avg_temp.values, '-', label="Avg Temp", color="tab:red")
+#ax1.plot(daily_avg_temp.index, daily_avg_temp.values, '-', label="Avg Temp", color="tab:red")
+ax1.plot(ambient["Time"], ambient["Temperature(F)"], '-', label="Temperature(F)", color="tab:red")
+
 ax1.set_xlabel("Date")
 ax1.set_ylabel("Temperature(F)", color="tab:red")
 
