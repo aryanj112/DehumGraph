@@ -35,6 +35,7 @@ fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(12, 8))
 ax1 = axes[0, 0]
 ax1.xaxis.set_major_locator(mdates.YearLocator())
 ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+ax1.set_ylim(0, 2) 
 ax1.plot(dehum["Start Date"], dehum["L/kWh"], '-', label="Efficiency", color="tab:blue")
 ax1.set_xlabel("Date")
 ax1.set_ylabel("Efficiency", color="tab:blue")
@@ -59,6 +60,7 @@ ax1.set_title("Efficiency, Avg Humidity, and Avg Temperature (AFTER AVERAGING)")
 
 # Plot 2
 ax2 = axes[0, 1]
+ax2.set_ylim(0, 2) 
 ax2.plot(dehum["Start Date"], dehum["L/kWh"], label="Efficiency", color="tab:blue")
 ax2.set_xlabel("Date")
 ax2.set_ylabel("Efficiency", color="tab:blue")
