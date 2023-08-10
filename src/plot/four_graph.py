@@ -67,7 +67,7 @@ ax2.set_ylabel("Efficiency", color="tab:blue")
 ax2.xaxis.set_major_locator(mdates.YearLocator())
 ax2.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 ax2.legend(loc="upper left")
-ax2.set_title("Weather Vs. Efficiency (2019-2023)")
+ax2.set_title("Weather Vs. Efficiency")
 
 # Plot 3
 ax3 = axes[1, 0]
@@ -77,7 +77,7 @@ ax3.set_ylabel("Average Temperature (°F)", color="tab:red")
 ax3.xaxis.set_major_locator(mdates.YearLocator())
 ax3.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 ax3.legend(loc="upper left")
-ax3.set_title("Average Temperature Vs. Time (2019-2023)")
+ax3.set_title("Average Temperature Vs. Time")
 
 # Plot 4
 ax4 = axes[1, 1]
@@ -87,9 +87,11 @@ ax4.set_xlabel("Date")
 ax4.xaxis.set_major_locator(mdates.YearLocator())
 ax4.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 ax4.legend(loc="upper left")
-ax4.set_title("Average Humidity(%) Vs. Time (2019-2023)")
+ax4.set_title("Average Humidity(%) Vs. Time")
+
 
 # Adjust layout
+plt.title("Efficiency, Weather, and Temperature (2019-2023)")
 plt.tight_layout()
 
 # Display all plots together
