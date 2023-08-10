@@ -91,7 +91,7 @@ ax4.set_title("Average Humidity(%) Vs. Time")
 
 
 # Adjust layout
-plt.title("Efficiency, Weather, and Temperature (2019-2023)")
+fig.suptitle("Multiple Plots: Efficiency, Temperature, and Humidity", fontsize=16, y=0.98)
 plt.tight_layout()
 
 # Display all plots together
