@@ -40,6 +40,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 ax1.plot(dehum["Start Date"], dehum["L/kWh"], '-', label="Efficiency", color="tab:blue")
 ax1.set_xlabel("Date")
 ax1.set_ylabel("Efficiency", color="tab:blue")
+ax1.set_ylim(0, 2)
 
 # Create a second y-axis for temperature and humidity
 ax2 = ax1.twinx()
