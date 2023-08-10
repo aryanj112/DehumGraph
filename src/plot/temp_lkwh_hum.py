@@ -16,17 +16,18 @@ dehum["Start Date"] = pd.to_datetime(dehum["Start Date"])
 weather["date"] = pd.to_datetime(weather["date"])
 ambient["Time"] = pd.to_datetime(ambient["Time"])
 
-# Filter data to start from 2021
-start_date = pd.to_datetime("2021-01-01")
-dehum = dehum[dehum["Start Date"] >= start_date]
-weather = weather[weather["date"] >= start_date]
-ambient = ambient[ambient["Time"] >= start_date]
+# Filter data start and end time
+start_date = pd.to_datetime("2019-01-01")
+end_date = pd.to_datetime("2023-08-08") 
+dehum = dehum[dehum["Start Date"].between(start_date, end_date)]
+weather = weather[weather["date"].between(start_date, end_date)]
+ambient = ambient[ambient["Time"].between(start_date, end_date)]
 
 fig, ax1 = plt.subplots()
 
 # Set the x-axis to show years
 ax1.xaxis.set_major_locator(mdates.YearLocator())
-ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))  # Format as year
+ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 
 # Plot first variable
 ax1.plot(dehum["Start Date"], dehum["L/kWh"], '-', label="Efficiency", color="tab:blue")
@@ -48,7 +49,9 @@ ax3.set_ylabel("Humidity (%)", color="tab:purple")
 # Show Legend
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-ax2.legend(lines + lines2, labels + labels2, loc="upper left", bbox_to_anchor=(0, 0.96))
+lines3, labels3 = ax3.get_legend_handles_labels()
+
+ax1.legend(lines + lines2+lines3, labels + labels2 + labels3, loc="upper left")
 
 # Title and end
 plt.title("Efficiency, Humidity, and Temperature")
