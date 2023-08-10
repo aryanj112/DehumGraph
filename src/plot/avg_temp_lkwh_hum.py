@@ -40,7 +40,7 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 ax1.plot(dehum["Start Date"], dehum["L/kWh"], '-', label="Efficiency", color="tab:blue")
 ax1.set_xlabel("Date")
 ax1.set_ylabel("Efficiency", color="tab:blue")
-ax1.set_ylim(0, 2)
+#ax1.set_ylim(0, 2)
 
 # Create a second y-axis for temperature and humidity
 ax2 = ax1.twinx()
@@ -63,6 +63,6 @@ lines3, labels3 = ax3.get_legend_handles_labels()
 ax1.legend(lines + lines2+lines3, labels + labels2 + labels3, loc="upper left")
 
 # Title and end
-plt.title("Efficiency, Avg Humidity, and Avg Temperature")
+plt.title("Efficiency, Avg Humidity, and Avg Temperature (AFTER AVERAGING)")
 fig.tight_layout()
 plt.show()

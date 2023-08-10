@@ -17,7 +17,7 @@ weather["date"] = pd.to_datetime(weather["date"])
 ambient["Time"] = pd.to_datetime(ambient["Time"])
 
 # Filter data start and end time
-start_date = pd.to_datetime("2019-01-01")
+start_date = pd.to_datetime("2021-01-01")
 end_date = pd.to_datetime("2023-08-08") 
 dehum = dehum[dehum["Start Date"].between(start_date, end_date)]
 weather = weather[weather["date"].between(start_date, end_date)]
@@ -53,6 +53,6 @@ lines3, labels3 = ax3.get_legend_handles_labels()
 ax1.legend(lines + lines2+lines3, labels + labels2 + labels3, loc="upper left")
 
 # Title and end
-plt.title("Efficiency, Humidity, and Temperature")
+plt.title("Efficiency, Humidity, and Temperature (BEFORE AVERAGING)")
 fig.tight_layout()
 plt.show()
