@@ -89,14 +89,14 @@ def plot_3():
     fig, ax1 = plt.subplots()
 
     # Calculate daily average temperature
-    daily_avg_temp = weather.groupby(weather["date"].dt.date)["temperature"].mean()
+    #daily_avg_temp = weather.groupby(weather["date"].dt.date)["temperature"].mean()
 
     ax1.set_xlabel("Date")
     ax1.set_ylabel("Average Temperature", color = "tab:blue")
 
     ax1.plot(weather["date"], weather["temperature"], 'o', label="Temperature", color="tab:red")
     ax1.set_xlabel("Date")
-    ax1.set_ylabel("Average Temperature (°C)", color="tab:red")
+    ax1.set_ylabel("Average Temperature (°F)", color="tab:red")
 
 
     # Set the x-axis to show years, you can adjust this as needed
@@ -112,8 +112,8 @@ def plot_4():
     fig, ax1 = plt.subplots()
 
     # Calculate daily average humidity
-    ambient["Date"] = ambient["Time"].dt.date
-    daily_avg_humidity = ambient.groupby("Date")["Humidity(%)"].mean()
+    #ambient["Date"] = ambient["Time"].dt.date
+    #daily_avg_humidity = ambient.groupby("Date")["Humidity(%)"].mean()
     
     ax1.plot(daily_avg_humidity.index, daily_avg_humidity.values, '-', label="Avg Humidity (%)", color="tab:purple")
     ax1.set_ylabel("Avg Humidity (%)", color="tab:purple")
