@@ -38,20 +38,24 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 ax1.plot(dehum["Start Date"], dehum["L/kWh"], '-', label="Efficiency", color="tab:blue")
 ax1.set_xlabel("Date")
 ax1.set_ylabel("Efficiency", color="tab:blue")
+
+# Create a second y-axis for temperature and humidity
 ax2 = ax1.twinx()
 ax2.plot(daily_avg_temp.index, daily_avg_temp.values, '-', label="Avg Temperature", color="tab:red")
 ax2.set_ylabel("Avg Temperature (°C)", color="tab:red")
+
+# Create a third y-axis for average humidity
 ax3 = ax1.twinx()
-ax3.spines['right'].set_position(('outward', 80))
-ax3.yaxis.set_major_locator(MaxNLocator(integer=True, nbins=15))
+ax3.spines['right'].set_position(('outward', 50))
 ax3.plot(daily_avg_humidity.index, daily_avg_humidity.values, '-', label="Avg Humidity (%)", color="tab:purple")
 ax3.set_ylabel("Avg Humidity (%)", color="tab:purple")
+
+# End and title
 lines, labels = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
 lines3, labels3 = ax3.get_legend_handles_labels()
 ax1.legend(lines + lines2 + lines3, labels + labels2 + labels3, loc="upper left")
 ax1.set_title("Efficiency, Avg Humidity, and Avg Temperature (AFTER AVERAGING)")
-fig.tight_layout()
 
 # Plot 2
 ax2 = axes[0, 1]
@@ -65,10 +69,7 @@ ax2.set_title("Weather Vs. Efficiency (2019-2023)")
 
 # Plot 3
 ax3 = axes[1, 0]
-daily_avg_temp = weather.groupby(weather["date"].dt.date)["temperature"].mean()
-ax3.set_xlabel("Date")
-ax3.set_ylabel("Average Temperature", color="tab:blue")
-ax3.plot(weather["date"], weather["temperature"], '-', label="Temperature", color="tab:red")
+ax3.plot(daily_avg_temp.index, daily_avg_temp.values, '-', label="Avg Temperature", color="tab:red")
 ax3.set_xlabel("Date")
 ax3.set_ylabel("Average Temperature (°F)", color="tab:red")
 ax3.xaxis.set_major_locator(mdates.YearLocator())
@@ -78,8 +79,6 @@ ax3.set_title("Average Temperature Vs. Time (2019-2023)")
 
 # Plot 4
 ax4 = axes[1, 1]
-ambient["Date"] = ambient["Time"].dt.date
-daily_avg_humidity = ambient.groupby("Date")["Humidity(%)"].mean()
 ax4.plot(daily_avg_humidity.index, daily_avg_humidity.values, '-', label="Avg Humidity (%)", color="tab:purple")
 ax4.set_ylabel("Avg Humidity (%)", color="tab:purple")
 ax4.set_xlabel("Date")
