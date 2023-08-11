@@ -19,8 +19,8 @@ ambient.dropna(inplace=True)  # Drops NaN values
 #daily_avg_temp = ambient.groupby("Date")["Temperature(F)"].mean()
 
 # Filter data to start from 2023-06-18
-start_date = pd.to_datetime("2023-06-26")  # Convert to datetime.date
-end_date = pd.to_datetime("2023-06-25")  # Convert to datetime.date
+start_date = pd.to_datetime("2023-06-25")  # Convert to datetime.date
+end_date = pd.to_datetime("2023-06-26")  # Convert to datetime.date
 #daily_avg_temp = daily_avg_temp.loc[start_date:end_date]
 ambient = ambient[ambient["Time"].between(start_date, end_date)]
 
