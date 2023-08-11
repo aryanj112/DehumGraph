@@ -44,6 +44,7 @@ ax3 = ax1.twinx()
 ax3.spines['right'].set_position(('outward', 80))
 ax3.yaxis.set_major_locator(MaxNLocator(integer=True, nbins=15))
 ax3.plot(ambient["Time"], ambient["Humidity(%)"], '-', label="Humidity (%)", color="tab:purple")
+ax3.plot(ambient["Time"], ambient["Humidity(%)"], '-', label="Humidity (%)", color="tab:purple")
 ax3.set_ylabel("Humidity (%)", color="tab:purple")
 
 # Show Legend
