@@ -12,9 +12,10 @@ ambient.replace("--", np.nan, inplace=True)  # Replaces '--' with NaN values
 
 # Use regular expression to filter out non-numeric values in Temperature(F) column
 ambient = ambient[ambient["Temperature(F)"].str.match(r'\d+\.\d+')]
-print(ambient["Time"].between(pd.to_datetime("2023-06-19"),pd.to_datetime("2023-06-20")))
+
 # Convert Temperature(F) column to numeric
-ambient['Temperature(F)'] = pd.to_numeric(ambient['Temperature(F)'])
+#ambient['Temperature(F)'] = pd.to_numeric(ambient['Temperature(F)'])
+
 # Filter data to start from 2023-06-18
 start_date = pd.to_datetime("2023-06-19")
 end_date = pd.to_datetime("2023-06-20")
