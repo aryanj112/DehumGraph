@@ -7,7 +7,7 @@ from matplotlib.ticker import MaxNLocator
 # Read data
 dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\dehumidifer_full_data.csv")
 weather = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\netzero\weather_file.csv")
-ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\ambient_CH1A_combine.csv")
+ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Out_FR_door\ambient_CH1A_combine.csv")
 
 # Convert data to datetime
 dehum["Start Date"] = pd.to_datetime(dehum["Start Date"])

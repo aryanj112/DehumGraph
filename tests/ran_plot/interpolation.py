@@ -14,7 +14,7 @@ ambient.replace("--", np.nan, inplace=True)  # Replaces '--' with NaN values
 ambient = ambient[ambient["Temperature(F)"].str.match(r'\d+\.\d+')]
 
 # Convert Temperature(F) column to numeric
-#ambient['Temperature(F)'] = pd.to_numeric(ambient['Temperature(F)'])
+ambient['Temperature(F)'] = pd.to_numeric(ambient['Temperature(F)'])
 
 # Filter data to start from 2023-06-18
 start_date = pd.to_datetime("2023-06-19")
