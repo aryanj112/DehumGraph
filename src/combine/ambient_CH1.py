@@ -5,10 +5,11 @@ import numpy as np
 
 # List of CSV file paths
 csv_files = [r"C:\Users\ajayj\DehumGraph\data\ambient_weather\2019CH1A_use.CSV",    
-             r"C:\Users\ajayj\DehumGraph\data\ambient_weather\2020CH1A_use.CSV",
-             r"C:\Users\ajayj\DehumGraph\data\ambient_weather\2021CH1A_use.csv", 
-             r"C:\Users\ajayj\DehumGraph\data\ambient_weather\2022CH1A_use.csv", 
-             r"C:\Users\ajayj\DehumGraph\data\ambient_weather\2023CH1A_use.csv"]
+    r"C:\Users\ajayj\DehumGraph\data\ambient_weather\2020CH1A_use.CSV",
+    r"C:\Users\ajayj\DehumGraph\data\ambient_weather\2021CH1A_use.csv", 
+    r"C:\Users\ajayj\DehumGraph\data\ambient_weather\2022CH1A_use.csv", 
+    r"C:\Users\ajayj\DehumGraph\data\ambient_weather\2023CH1A_use.csv"
+]
 
 # Load and concatenate multiple CSV files
 data_frames = [pd.read_csv(file) for file in csv_files]
