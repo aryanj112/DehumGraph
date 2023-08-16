@@ -1,46 +1,43 @@
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import pandas as pd
 import numpy as np
+from scipy.interpolate import CubicSpline
 
-# Read data and perform preprocessing
-ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Deh(out)\2023CH6A_use.CSV")
+# Read data
+ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_combine.CSV")
 
 # Convert Time column to datetime
 ambient["Time"] = pd.to_datetime(ambient["Time"], format="%m/%d/%y %H:%M")
+
 # Clean data
 ambient.replace("--", np.nan, inplace=True)  # Replaces '--' with NaN values
+ambient['Humidity(%)'] = pd.to_numeric(ambient['Humidity(%)'], errors='coerce')  # Convert humidity column to numeric values
+ambient.dropna(inplace=True)  # Drops NaN values
 
-# Use regular expression to filter out non-numeric values in Temperature(F) column
-ambient = ambient[ambient["Temperature(F)"].str.match(r'\d+\.\d+')]
-
-# Convert Temperature(F) column to numeric
-ambient['Temperature(F)'] = pd.to_numeric(ambient['Temperature(F)'])
-
-# Filter data to start from 2023-06-18
-start_date = pd.to_datetime("2023-06-19")
-end_date = pd.to_datetime("2023-06-20")
+# Fitlter time 
+start_date = pd.to_datetime("2023-07-04")  
+end_date = pd.to_datetime("2023-07-05")  
 ambient = ambient[ambient["Time"].between(start_date, end_date)]
 
-# Set up figure and axes
+# Create a figure and plot
 fig, ax1 = plt.subplots()
 
-# Resample the data for smoother lines
-resampled_data = ambient.set_index("Time").resample("10T").mean()  # Resample every 10 minutes
+ax1.plot(ambient["Time"], ambient["Humidity(%)"], '-', label="Humidity(%)", color="tab:purple")
 
-# Plot smoother line
-ax1.plot(resampled_data.index, resampled_data["Temperature(F)"], '-', label="Temperature(F)", color="tab:red")
+vertical_line_time = pd.to_datetime("2023-07-04 12:00") # Add vertical line at 11 o'clock on July 5th, 2023
+ax1.axvline(x=vertical_line_time, color='red', linestyle='--')
 
-ax1.set_xlabel("Time")
-ax1.set_ylabel("Temperature(F)", color="tab:red")
+ax1.set_xlabel("Date and Time")
+ax1.set_ylabel("Humidity(%)", color="tab:purple")
 
-# Rotate x-axis labels for better visibility
-plt.xticks(rotation=45)
+ax1.xaxis.set_major_locator(mdates.HourLocator(interval=2))  # Show ticks every 6 hour
+ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M"))  # Format as month, day, and hour:minute
 
 # Show Legend
 ax1.legend(loc="upper left")
-
-# Set plot title
-plt.title("Smoothed Temperature Line Plot Vs. Time (2023)")
+plt.xticks(rotation= 45)
+plt.title("Humidity(%) Vs. Time (hourly)") # Set plot title
 
 # Display the plot
 plt.tight_layout()
