@@ -23,7 +23,12 @@ ambient = ambient[ambient["Time"].between(start_date, end_date)]
 # Create a figure and plot
 fig, ax1 = plt.subplots()
 
-ax1.plot(ambient["Time"], ambient["Humidity(%)"], '-', label="Humidity(%)", color="tab:purple")
+cubic_interp = CubicSpline(ambient["Time"], ambient["Humidity(%)"])
+x_interp = np.linspace(min(ambient["Time"]), max(ambient["Time"]), 100)
+y_interp = cubic_interp(x_interp)
+
+#ax1.plot(ambient["Time"], ambient["Humidity(%)"], '-', label="Humidity(%)", color="tab:purple")
+ax1.plot(x_interp, y_interp, '-', label="Humidity(%)", color="tab:purple")
 
 vertical_line_time = pd.to_datetime("2023-07-04 12:00") # Add vertical line at 11 o'clock on July 5th, 2023
 ax1.axvline(x=vertical_line_time, color='red', linestyle='--')
