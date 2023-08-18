@@ -1,5 +1,4 @@
-def relToAbs(temp,relHum):
-    # Initial variables
+def cal_absHum(temp,relHum):
     temp = temp  # Measured in Fahrenheit
     relHum = relHum  # Relative humidity
     Rw = 461.5   # Specific gas constant for water vapor (J/(kg·K))
@@ -17,4 +16,10 @@ def relToAbs(temp,relHum):
     absHum_g = absHum * 1000 # Convert abs hum from kg/m^3 to g/m^3 
     return absHum_g
 
-print(relToAbs(40,40))
+if __name__ == '__main__':
+    try:
+        temp = float(input("Enter Temperature in F: "))
+        relHum = float(input("Enter Relative Humidity: "))
+        print(f"Absolute Humidity: {cal_absHum(temp,relHum):.4f} g/m³")
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
