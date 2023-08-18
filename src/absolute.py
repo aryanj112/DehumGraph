@@ -18,4 +18,6 @@ print(f"Saturation Vapor Pressure: {satuVap_pa:.2f} Pa")
 
 # Calculate absolute humidity (absHum)
 absHum = (relHum * satuVap_pa) / (Rw * temp_kelvin * 100)
+absHum_g = absHum * 1000
 print(f"Absolute Humidity: {absHum:.6f} kg/m^3")
+print(f"Absolute Humidity: {absHum_g:.6f} g/m^3")
