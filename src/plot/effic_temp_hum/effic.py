@@ -1,36 +1,30 @@
-# Plotting file that graphs l/kWh agaisnt time
-# Dehumidifier Data -> L/kWh
-
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
 
-#dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\dehumidifer_full_data.csv")
-dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifier_Full_Data_New.csv")
+def plot_effic(year):    
+    dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifier_Full_Data_New.csv")
+    dehum["Start Date"] = pd.to_datetime(dehum["Start Date"])
 
-dehum["Start Date"] = pd.to_datetime(dehum["Start Date"]) # Convert dehum date to datetime
+    start_date = pd.to_datetime(f'{year}-05-01')
+    end_date = pd.to_datetime(f'{year}-11-30') 
+    dehum = dehum[dehum["Start Date"].between(start_date, end_date)]
 
-# Filter data to start from 2019
-start_date = pd.to_datetime("2021-05-01")
-end_date = pd.to_datetime("2021-11-30") 
-dehum = dehum[dehum["Start Date"].between(start_date, end_date)]
+    fig, ax1 = plt.subplots()
 
-fig, ax1 = plt.subplots()
+    ax1.set_ylim(0, 2) 
+    ax1.plot(dehum["Start Date"],dehum["L/kWh"], label = "Efficiency [L/kWh]", color = "tab:blue")
+    ax1.set_xlabel("Month")
+    ax1.set_ylabel("Efficiency [L/kWh]", color = "tab:blue")
 
-ax1.set_ylim(0, 2) 
-ax1.plot(dehum["Start Date"],dehum["L/kWh"], label = "Efficiency", color = "tab:blue")
-ax1.set_xlabel("Date")
-ax1.set_ylabel("Efficiency", color = "tab:blue")
+    ax1.xaxis.set_major_locator(mdates.MonthLocator())
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter("%m"))
 
-# Set the x-axis to show years, you can adjust this as needed
-#ax1.xaxis.set_major_locator(mdates.YearLocator())
-#ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))  # Format as year
+    ax1.legend(loc = "upper left")
 
-ax1.xaxis.set_major_locator(mdates.MonthLocator())
-ax1.xaxis.set_major_formatter(mdates.DateFormatter("%m"))  # Format as year
+    plt.title(f"Time Vs. Efficiency [L/kWh] (May To November {year})")
+    plt.show()
 
-#Show Legend
-ax1.legend(loc = "upper left")
-
-plt.title("Weather Vs. Efficiency (Summer To Winter 2021)")
-plt.show()
+if __name__ == '__main__':
+    year = input("Enter a year: ")
+    plot_effic(year)
