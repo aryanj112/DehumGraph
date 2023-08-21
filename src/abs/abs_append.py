@@ -1,4 +1,4 @@
-import abs.absolutelute as myAbs
+import absolute as myAbs
 import pandas as pd
 
 data_frame = pd.read_csv(r'data\ambient_weather/Base(guest)\CH7A_combine.csv')
