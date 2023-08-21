@@ -12,7 +12,7 @@ ambient["Time"] = pd.to_datetime(ambient["Time"], format="%m/%d/%y %H:%M")
 
 # Clean data
 ambient.replace("--", np.nan, inplace=True)
-ambient['Absolute Humidity(%)'] = pd.to_numeric(ambient['Absolute Humidity(%)'], errors='coerce')
+ambient['Absolute Humidity(g/m^3)'] = pd.to_numeric(ambient['Absolute Humidity(g/m^3)'], errors='coerce')
 ambient.dropna(inplace=True)
 
 # Filter time
@@ -29,7 +29,7 @@ fig, ax1 = plt.subplots()
 
 #ax1.plot(x_interp, y_interp, '-', label="Absolute Humidity [g/m^3]", color="tab:purple")
 
-ax1.plot(ambient["Time"], ambient["Absolute Humidity(%)"], '-', label="Absolute Humidity [g/m^3]", color="tab:purple")
+ax1.plot(ambient["Time"], ambient["Absolute Humidity(g/m^3)"], '-', label="Absolute Humidity [g/m^3]", color="tab:purple")
 #ax1.plot(ambient["Time"], ambient["Humidity(%)"], '-', label="Humidity(%)", color="tab:purple")
 
 vertical_line_time = pd.to_datetime("2023-07-04 12:00")
