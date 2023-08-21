@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from matplotlib.ticker import MaxNLocator
 
-def plot_eff_tem_hum(year, loc, show, write, avg):
+def plot_eff_hum_temp(year, loc, show, write, avg):
     dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifier_Full_Data_New.csv")
     weather = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\netzero\weather_file.csv")
     
@@ -97,4 +97,4 @@ if __name__ == '__main__':
     show = input('Do you want to show this [Y/N]: ').upper() 
     write = input('Do you want to save this [Y/N]: ').upper()
 
-    plot_eff_tem_hum(year, loc, show, write, avg)
+    plot_eff_hum_temp(year, loc, show, write, avg)

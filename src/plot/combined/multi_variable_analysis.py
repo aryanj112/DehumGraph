@@ -3,7 +3,6 @@ import matplotlib.dates as mdates
 import pandas as pd
 from matplotlib.ticker import MaxNLocator
 
-# Read data and perform preprocessing (you can keep this as it is)
 # Read data
 dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\dehumidifer_full_data.csv")
 weather = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\netzero\weather_file.csv")
