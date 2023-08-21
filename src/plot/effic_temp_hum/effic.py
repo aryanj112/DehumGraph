@@ -11,8 +11,8 @@ dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifier_Full_Data_New.
 dehum["Start Date"] = pd.to_datetime(dehum["Start Date"]) # Convert dehum date to datetime
 
 # Filter data to start from 2019
-start_date = pd.to_datetime("2023-05-06")
-end_date = pd.to_datetime("2023-08-14") 
+start_date = pd.to_datetime("2021-05-01")
+end_date = pd.to_datetime("2021-11-30") 
 dehum = dehum[dehum["Start Date"].between(start_date, end_date)]
 
 fig, ax1 = plt.subplots()
@@ -32,5 +32,5 @@ ax1.xaxis.set_major_formatter(mdates.DateFormatter("%m"))  # Format as year
 #Show Legend
 ax1.legend(loc = "upper left")
 
-plt.title("Weather Vs. Efficiency (Summer 2023)")
+plt.title("Weather Vs. Efficiency (Summer To Winter 2021)")
 plt.show()
