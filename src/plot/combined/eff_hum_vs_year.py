@@ -11,7 +11,7 @@ def plot_effic_ah(year, loc, show, write):
     # Determine file path based on location
     if loc == 'guestroom':
         file_path = r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_Absolute.csv"
-    elif loc == 'front_door':
+    elif loc == 'frontdoor':
         file_path = r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Out_FR_door\CH1A_Absolute.csv"
     else:
         raise ValueError('Invalid location specified')
@@ -35,7 +35,7 @@ def plot_effic_ah(year, loc, show, write):
     ax2 = ax1.twinx()
 
     # Plot efficiency on the first axis
-    ax1.plot(ambient["Time"], ambient["Absolute Humidity(g/m^3)"], '-', label="Absolute Humidity {g/m^3]", color="tab:purple")
+    ax1.plot(ambient["Time"], ambient["Absolute Humidity(g/m^3)"], '-', label="Absolute Humidity [g/m^3]", color="tab:purple")
     ax1.set_xlabel("Month")
     ax1.set_ylabel("Absolute Humidity[g/m^3]", color="tab:blue")
 
@@ -69,7 +69,7 @@ def plot_effic_ah(year, loc, show, write):
 
 if __name__ == '__main__':
     year = input("Enter a year: ")
-    loc = input("Enter a location to plot Effic Vs. A.H. (guestroom or front_door): ")
+    loc = input("Enter a location to plot Effic Vs. A.H. (guestroom or frontdoor): ")
     show = input('Do you want to show this [Y/N]: ').upper() # Convert to uppercase for comparison
     write = input('Do you want to save this [Y/N]: ').upper()  # Convert to uppercase for comparison
 
