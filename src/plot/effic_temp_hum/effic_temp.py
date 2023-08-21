@@ -19,12 +19,10 @@ weather = weather[weather["date"] >= "2021-01-01"]
 fig, ax1 = plt.subplots()
 ax2 = ax1.twinx()
 
-#Plot First Variable
 ax1.plot(dehum["Start Date"],dehum["L/kWh"], label = "Efficiency", color = "tab:blue")
 ax1.set_xlabel("Date")
 ax1.set_ylabel("Efficiency", color = "tab:blue")
 
-#Plot First Variable
 ax2.plot(weather["date"],weather["temperature"], 'o',label = "Temperature", color = "tab:red")
 ax2.set_ylabel("Temperature", color = "tab:blue")
 
