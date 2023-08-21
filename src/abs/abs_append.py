@@ -1,4 +1,4 @@
-import absolute as myAbs
+import absolute as abs
 import pandas as pd
 
 data_frame = pd.read_csv(r'data\ambient_weather/Base(guest)\CH7A_combine.csv')
@@ -8,7 +8,7 @@ abs_hum_values = []
 for index, row in data_frame.iterrows():
     temp = row['Temperature(F)']  # Assuming 'temp' is the column name for temperature
     rel_hum = row['Humidity(%)']  # Assuming 'relhum' is the column name for relative humidity
-    abs_hum = myAbs.cal_absHum(temp, rel_hum)
+    abs_hum = abs.cal_absHum(temp, rel_hum)
     abs_hum_values.append(abs_hum)
 
 # Add the calculated values to a new column
