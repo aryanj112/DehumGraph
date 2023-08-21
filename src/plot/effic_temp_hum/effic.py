@@ -23,12 +23,13 @@ def plot_effic(year, write):
     ax1.legend(loc = "upper left")
 
     plt.title(f"Time Vs. Efficiency [L/kWh] (May To November {year})")
-    plt.show()
 
-    # Save the plot as an image
     if write == 'Y':
-        plot_filename = f"Time_Vs_Effic(May_Nov_{year})"  
+        plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\Time_Vs_Effic(May_Nov_{year}).png'
+        plt.savefig(plot_filename, dpi=300)
         print(f"Plot saved as '{plot_filename}'")
+
+    plt.show()
 
 if __name__ == '__main__':
     year = input("Enter a year: ")
