@@ -1,6 +1,3 @@
-# Plotting file that graphs avg temperature, l/kWh, and avg humidity all agaisnt time
-# NetZero -> Avg Temperature # Dehumidifier Data -> L/kWh # Ambient Weather -> Avg Humidity
-
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
