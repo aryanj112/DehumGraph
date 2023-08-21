@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pandas as pd
 
-def plot_effic(year):    
+def plot_effic(year, write):    
     dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifier_Full_Data_New.csv")
     dehum["Start Date"] = pd.to_datetime(dehum["Start Date"])
 
@@ -25,6 +25,12 @@ def plot_effic(year):
     plt.title(f"Time Vs. Efficiency [L/kWh] (May To November {year})")
     plt.show()
 
+    # Save the plot as an image
+    if write == 'Y':
+        plot_filename = f"Time_Vs_Effic(May_Nov_{year})"  
+        print(f"Plot saved as '{plot_filename}'")
+
 if __name__ == '__main__':
     year = input("Enter a year: ")
-    plot_effic(year)
+    write = input('Do you want to save this [Y/N]: ')
+    plot_effic(year, write)
