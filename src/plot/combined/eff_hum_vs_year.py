@@ -3,7 +3,7 @@ import matplotlib.dates as mdates
 import pandas as pd
 import numpy as np
 
-def plot_eff_hum(year, loc, show, write):
+def plot_eff_hum_vs_time(year, loc, show, write):
     # Load humidity and dehumidifier data
     dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifier_Full_Data_New.csv")
     dtype_options = {'Temperature(F)': float, 'Humidity(%)': float, 'Dewpoint(F)': float, 'HeatIndex(F)': float, 'Absolute Humidity(g/m^3)': float}
@@ -73,4 +73,4 @@ if __name__ == '__main__':
     show = input('Do you want to show this [Y/N]: ').upper() # Convert to uppercase for comparison
     write = input('Do you want to save this [Y/N]: ').upper()  # Convert to uppercase for comparison
 
-    plot_eff_hum(year, loc, show, write)
+    plot_eff_hum_vs_time(year, loc, show, write)

@@ -34,7 +34,7 @@ def plot_eff_hum_temp(year, loc, show, write, avg):
     ambient = ambient[ambient["Time"].between(start_date, end_date)]
     
     ambient["Date"] = ambient["Time"].dt.date
-    daily_avg_humidity = ambient.groupby("Date")["Humidity(%)"].mean()
+    daily_avg_humidity = ambient.groupby("Date")["Absolute Humidity(g/m^3)"].mean()
     daily_avg_temp = weather.groupby(weather["date"].dt.date)["temperature"].mean()
 
     fig, ax1 = plt.subplots()
