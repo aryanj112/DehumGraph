@@ -18,7 +18,7 @@ def plot_eff_hum(loc, show, write):
         raise ValueError('Invalid location specified')
 
     dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifier_Full_Data_New.csv")    
-    ambient = pd.read_csv(file_path, dtype=dtype_options, low_memory=False)
+    ambient = pd.read_csv(file_path) #dtype=dtype_options, low_memory=False
     
     dehum["Start Date"] = pd.to_datetime(dehum["Start Date"])
     ambient['Time'] = pd.to_datetime(ambient['Time'], format="%m/%d/%y %H:%M")
