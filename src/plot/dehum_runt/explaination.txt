@@ -1,0 +1,20 @@
+New dehum_runt folder:
+A folder dedicated to figuring out the exact time the dehumidifier was running and then averaging the absolute humidity for that day and then with that we will graph the ah vs eff graph
+
+Steps:
+
+(✅) Get AW data from the deh(out) and, later, Base(guest)
+() Transcribe data from dehumidifier
+(✅) Determain a time zone (6/18/2023 - 10/10/2023)
+
+daily_test.py
+() Get plots of the temperature of the outlet to see when the dehumidifier starts
+
+dehum_start_end.py
+() Code to cross referance room temperature with the deh(out) temperature to get the start time
+() Get the time the bucket was emptied and cross referance with normal temperatures to get the end time
+
+plot.py (better name later)
+() Take these times and average the ah values for that day
+() That value is now the ah for the day and the efficiency is already noted down
+() Plot each point 
