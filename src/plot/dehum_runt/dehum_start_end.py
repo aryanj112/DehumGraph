@@ -3,27 +3,17 @@ import matplotlib.dates as mdates
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+import day_average as da
 
-def dehum_start_end(month, day, varbool):    
+def dehum_start_end(month, day):    
     
-    if varbool == 'H':
-        var = "Humidity(%)"
-    else:
-        var = "Temperature(F)"
-
-    #Read data
+    # Read data
     ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Deh(out)\2023CH6A_use.csv")
-    ambientBase = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_Absolute.csv")
 
     # Clean data
     ambient.replace("---.-", np.nan, inplace=True)
-    ambient[var] = pd.to_numeric(ambient[var], errors='coerce')
+    ambient["Temperature(F)"] = pd.to_numeric(ambient["Temperature(F)"], errors='coerce')
     ambient.dropna(inplace=True)
-
-    ambientBase.replace("---.-", np.nan, inplace=True)
-    ambientBase[var] = pd.to_numeric(ambient[var], errors='coerce')
-    ambientBase.dropna(inplace=True)
-
 
     # Filter time
     ambient["Time"] = pd.to_datetime(ambient["Time"], format="%m/%d/%y %H:%M")
@@ -32,29 +22,31 @@ def dehum_start_end(month, day, varbool):
     input_date = datetime(year=2023, month=month, day=day)
     new_date = input_date + timedelta(days=1)
     ambient = ambient[ambient["Time"].between(input_date, new_date)]
-    ambientBase["Time"] = pd.to_datetime(ambientBase["Time"], format="%m/%d/%y %H:%M")
-    ambientBase = ambientBase[ambientBase["Time"].between(input_date, new_date)]
-    day_avg_temperature = ambientBase.groupby("Time")[var].mean()
-    print(day_avg_temperature)
-    #Plot
+
+    day_avg_temperature = da.day_average(input_date, new_date)
+    print (day_avg_temperature)
+    
+    # Plot
     fig, ax1 = plt.subplots()
-    ax1.plot(ambient["Time"], ambient[var], '-', label={var}, color="tab:red")
+    ax1.plot(ambient["Time"], ambient["Temperature(F)"], '-', label="Temperature(F)", color="tab:red")
     vertical_line_time = pd.to_datetime("2023-07-18 12:00")
     ax1.axvline(x=vertical_line_time, color='red', linestyle='--')
     ax1.set_xlabel("Time")
-    ax1.set_ylabel(var, color="tab:red")
+    ax1.set_ylabel("Temperature(F)", color="tab:red")
     ax1.xaxis.set_major_locator(mdates.HourLocator(interval=2))
     ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M"))
+    
+    # Plot the daily average temperature as a horizontal line
+    #ax1.axhline(y=day_avg_temperature.mean(), color='tab:blue', linestyle='--', label="Daily Avg Temperature")
+    
     ax1.legend(loc="upper left")
-    #plt.axhline(y=day_avg_temperature, color='tab:blue', linestyle='--')
     plt.xticks(rotation=45)
-    plt.title(f"{var} Vs. Time (H)")
+    plt.title("Temperature(F) Vs. Time (H)")
     plt.tight_layout()
     plt.show()
 
 if __name__ == '__main__':
-    input('You will be prompted to enter a month and day after June 18th, 2023...press enter')
+    print('You will enter a month and day after June 18th, 2023')
     month = input('Enter month: ')
     day = input('Enter day: ')
-    varbool = input ('Enter T or H: (temperature or humidity) ')
-    dehum_start_end(month, day, varbool)
+    dehum_start_end(month, day)
