@@ -2,14 +2,9 @@ import matplotlib.dates as mdates
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+from dateutil import parser
 
-def day_average(input_date, new_date):    
-    # Define the date and time format
-    print(input_date)
-    print(new_date)
-
-    date_time_format = "%m/%d/%y %H:%M"  # Assuming format is "month day year army time"
-
+def day_average(input_date, new_date):
     # Read data
     ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_Absolute.csv")
 
@@ -19,8 +14,12 @@ def day_average(input_date, new_date):
     ambient.dropna(inplace=True)
 
     # Filter time
-    ambient["Time"] = pd.to_datetime(ambient["Time"], format=date_time_format)  # Use the specified format
-    ambient = ambient[ambient["Time"].between(input_date, new_date)]
+    ambient["Time"] = ambient["Time"].apply(lambda x: parser.parse(x))  # Parse various date and time formats
+
+    input_date = parser.parse(input_date)
+    new_date = parser.parse(new_date)
+
+    ambient = ambient[(ambient["Time"] >= input_date) & (ambient["Time"] <= new_date)]
 
     day_avg_temperature = ambient["Temperature(F)"].mean()
 
