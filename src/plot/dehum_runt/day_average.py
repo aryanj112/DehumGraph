@@ -18,7 +18,7 @@ def day_average(input_date, new_date):
     ambient["Time"] = pd.to_datetime(ambient["Time"], format="%m/%d/%y %H:%M")
     ambient = ambient[ambient["Time"].between(input_date, new_date)]
 
-    day_avg_temperature = ambient.groupby("Time")["Temperature(F)"].mean()
+    day_avg_temperature = ambient["Temperature(F)"].mean()
 
     return day_avg_temperature
 
