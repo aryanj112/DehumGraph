@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 def day_average(input_date, new_date):    
     
     # Read data
-    ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_Absolute.csv")
+    ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_Combine.csv")
 
     # Clean data
     ambient.replace("---.-", np.nan, inplace=True)
