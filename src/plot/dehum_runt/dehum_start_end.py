@@ -5,7 +5,7 @@ import numpy as np
 from datetime import datetime, timedelta
 import day_average as da
 
-def dehum_start_end(start_date,end_date):
+def dehum_start_end(start_date,end_date,write):
 
     # Read data
     temperature_data = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Deh(out)\2023CH6A_use.csv")
@@ -55,7 +55,14 @@ def dehum_start_end(start_date,end_date):
     plt.tight_layout()
     plt.show()
 
+    if write == 'Y':
+        formatted_date = formatted_date.replace('/', '_')
+        plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\dehum_run\{formatted_date}_Temp@Deh_Out_vs_Time.png'
+        plt.savefig(plot_filename, dpi=500, bbox_inches='tight')   
+        print(f"Plot saved as '{plot_filename}'")
+
 if __name__ == '__main__':
     start_date = input("Enter start date (e.g., 4/5/23): ")
     end_date = input("Enter end date (e.g., 4/6/23): ")
-    print(dehum_start_end(start_date,end_date))
+    write = input('Do you want to save this [Y/N]: ').upper()
+    dehum_start_end(start_date,end_date,write)
