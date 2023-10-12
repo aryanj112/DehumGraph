@@ -9,6 +9,7 @@ def dehum_start_end(start_date,end_date):
 
     # Read data
     temperature_data = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Deh(out)\2023CH6A_use.csv")
+    dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifier_Full_Data_New_Form.csv")
 
     # Clean data
     temperature_data.replace("---.-", np.nan, inplace=True)
@@ -23,6 +24,7 @@ def dehum_start_end(start_date,end_date):
 
     temperature_data["Time"] = pd.to_datetime(temperature_data["Time"], format= "%m/%d/%y %H:%M")
     temperature_data = temperature_data[temperature_data["Time"].between(formatted_date, formatted_date2)]
+    dehum = dehum[dehum["Start Date"].between(formatted_date,formatted_date)]
 
     # Get the daily average temperature using the 'day_average' module
     day_avg_temperature = da.day_average(formatted_date, formatted_date2)
@@ -30,8 +32,15 @@ def dehum_start_end(start_date,end_date):
     # Plot
     fig, ax1 = plt.subplots()
     ax1.plot(temperature_data["Time"], temperature_data["Temperature(F)"], '-', label="Temperature(F)", color="tab:red")
-    #vertical_line_time = pd.to_datetime("2023-06-13 12:00")
-    #ax1.axvline(x=vertical_line_time, color='red', linestyle='--')
+    
+    # Iterate through rows in dehum to add vertical lines
+    date_is_within_df = dehum['Start Date'].between(formatted_date, formatted_date).any()
+
+    if date_is_within_df:
+        for _, row in dehum.iterrows():
+            vertical_line_time = pd.to_datetime(formatted_date + ' ' + row["Start Time"])
+            ax1.axvline(x=vertical_line_time, color='red', linestyle='--')
+
     ax1.set_xlabel("Time")
     ax1.set_ylabel("Temperature(F)", color="tab:red")
     ax1.xaxis.set_major_locator(mdates.HourLocator(interval=2))
