@@ -53,13 +53,14 @@ def dehum_start_end(start_date,end_date,write):
     plt.xticks(rotation=45)
     plt.title("Temperature(F) at Deh(out) Vs. Time (H)")
     plt.tight_layout()
-    plt.show()
 
     if write == 'Y':
         formatted_date = formatted_date.replace('/', '_')
         plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\dehum_run\{formatted_date}_Temp@Deh_Out_vs_Time.png'
         plt.savefig(plot_filename, dpi=500, bbox_inches='tight')   
         print(f"Plot saved as '{plot_filename}'")
+
+    plt.show()
 
 if __name__ == '__main__':
     start_date = input("Enter start date (e.g., 4/5/23): ")
