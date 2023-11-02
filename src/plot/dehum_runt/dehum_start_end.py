@@ -60,13 +60,13 @@ def dehum_start_end(start_date,end_date,write):
         plt.savefig(plot_filename, dpi=500, bbox_inches='tight')   
         print(f"Plot saved as '{plot_filename}'")
 
-    #plt.show()
+    plt.show()
 
 if __name__ == '__main__':
-    #start_date = input("Enter start date (e.g., 4/5/23): ")
-    #end_date = input("Enter end date (e.g., 4/6/23): ")
-    #write = input('Do you want to save this [Y/N]: ').upper()
-    #dehum_start_end(start_date,end_date,write)
+    start_date = input("Enter start date (e.g., 4/5/23): ")
+    end_date = input("Enter end date (e.g., 4/6/23): ")
+    write = input('Do you want to save this [Y/N]: ').upper()
+    dehum_start_end(start_date,end_date,write)
     date_ranges = [
     ('6/18/23', '6/19/23'),
     ('6/19/23', '6/20/23'),
@@ -128,5 +128,5 @@ if __name__ == '__main__':
     ('8/14/23', '8/15/23')
     ]   
 
-    for start_date, end_date in date_ranges:
-        dehum_start_end(start_date, end_date, 'Y')  
+    #for start_date, end_date in date_ranges:
+        #dehum_start_end(start_date, end_date, 'Y')  
