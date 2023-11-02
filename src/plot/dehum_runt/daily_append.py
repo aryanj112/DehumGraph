@@ -3,6 +3,7 @@ import numpy as np
 
 dehum_run = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\dehum_runtimes_update.csv")
 dehum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifier_Full_Data_New_Form.csv")
+dehum_BEST = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Dehumidifer_Full_Data_Form_Runtime.csv")
 
 def runtime_write(write):
     dehum_run['Date'] = pd.to_datetime(dehum_run['Date'], format='%m/%d/%Y')
