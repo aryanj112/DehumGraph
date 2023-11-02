@@ -22,7 +22,12 @@ def avg_time(write):
     plt.grid(True)
     plt.xticks(rotation=45)
     plt.tight_layout()
+    
+    if (write == 'Y'):
+        plt.savefig("Dehumidifier Run time (Hours)", dpi=500, bbox_inches='tight')   
+    
     plt.show()
 
 if __name__ == '__main__':
+    write = input('Do you want to save this [Y/N]: ').upper()
     avg_time(write)
