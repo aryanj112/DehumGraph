@@ -1,11 +1,13 @@
 New dehum_runt folder:
 A folder dedicated to figuring out the exact time the dehumidifier was running and then averaging the absolute humidity for that day and then with that we will graph the ah vs eff graph
 
+Next steps: recalculate efficiency and then go ahead and plot the new efficiency as a function of the absolute humidity of the basement rom
+
 Steps:
 
 (✅) Get AW data from the deh(out) and, later, Base(guest)
 () Transcribe data from dehumidifier
-(✅) Determain a time zone (6/18/2023 - 10/10/2023)
+(✅) Determine a time zone (6/18/2023 - 10/10/2023)
 
 daily_test.py
 (✅) Get plots of the temperature of the outlet to see when the dehumidifier starts
