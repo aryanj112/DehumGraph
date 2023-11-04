@@ -10,24 +10,27 @@ run_times['RT1.2'] = run_times['Run Zone 1'].apply(lambda x: int(x.split('-')[1]
 run_times['RT2.1'] = run_times['Run Zone 2'].apply(lambda x: int(x.split('-')[0]) if isinstance(x, str) and '-' in x else np.nan).fillna(0)
 run_times['RT2.2'] = run_times['Run Zone 2'].apply(lambda x: int(x.split('-')[1]) if isinstance(x, str) and '-' in x else np.nan).fillna(0)
 
-start_time = pd.to_datetime('2023-06-18')
-end_time = pd.to_datetime('2023-08-15')
-
 run_times['Date'] = pd.to_datetime(run_times['Date'], format='%m/%d/%y %H:%M')
 run_times['RT1.1'] = run_times['Date'] + pd.to_timedelta(run_times['RT1.1'], unit='h')
 run_times['RT1.2'] = run_times['Date'] + pd.to_timedelta(run_times['RT1.2'], unit='h')
+run_times['RT2.1'] = run_times['Date'] + pd.to_timedelta(run_times['RT2.1'], unit='h')
+run_times['RT2.2'] = run_times['Date'] + pd.to_timedelta(run_times['RT2.2'], unit='h')
 
-def calculate_mean(row):
+def calculate_mean(row, zone):
     selected_data = ambient[
-        (ambient['Time'] >= row['RT1.1']) &
-        (ambient['Time'] <= row['RT1.2'])
+        (ambient['Time'] >= row[f'RT{zone}.1']) &
+        (ambient['Time'] <= row[f'RT{zone}.2'])
     ]
     if not selected_data.empty:
         return selected_data['Absolute Humidity(g/m^3)'].mean()
     return np.nan
 
-run_times['Average Absolute Humidity'] = run_times.apply(calculate_mean, axis=1)
+run_times['Average Absolute Humidity Zone 1'] = run_times.apply(lambda row: calculate_mean(row, 1), axis=1)
+run_times['Average Absolute Humidity Zone 2'] = run_times.apply(lambda row: calculate_mean(row, 2), axis=1)
 
-mean_absolute_humidity = ambient[(ambient['Time'] >= start_time) & (ambient['Time'] <= end_time)]['Absolute Humidity(g/m^3)']
-grouped = mean_absolute_humidity.groupby(ambient['Time']).mean()
-print(grouped)
+# Reset the index to make it easier to access
+grouped = run_times.set_index('Date')
+grouped.fillna(0)
+plot_filename = fr'C:\Users\ajayj\DehumGraph\data\dehum_rt_avg_AH.csv'
+grouped.to_csv(plot_filename, index=False)
+print(f"Plot saved as '{plot_filename}'")
