@@ -17,6 +17,6 @@ dehum_start_end.py
 (✅) Get the time the bucket was emptied and cross referance with normal temperatures to get the end time
 
 plot.py (better name later)
-() Take these times and average the ah values for that day
-() That value is now the ah for the day and the efficiency is already noted down
+(✅) Take these times and average the ah values for that day
+(✅) That value is now the ah for the day and the efficiency is already noted down
 () Plot each point 

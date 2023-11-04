@@ -29,8 +29,14 @@ run_times['Average Absolute Humidity Zone 1'] = run_times.apply(lambda row: calc
 run_times['Average Absolute Humidity Zone 2'] = run_times.apply(lambda row: calculate_mean(row, 2), axis=1)
 
 # Reset the index to make it easier to access
+
+
+# Reset the index to make it easier to access
+
+run_times['Date_Only'] = run_times['Date'].dt.date
+grouped = run_times.set_index('Date_Only')
 grouped = run_times.set_index('Date')
 grouped.fillna(0)
-plot_filename = fr'C:\Users\ajayj\DehumGraph\data\dehum_rt_avg_AH.csv'
+plot_filename = fr'C:\Users\ajayj\DehumGraph\data\dehum_rt_avg_AH_new.csv'
 grouped.to_csv(plot_filename, index=False)
 print(f"Plot saved as '{plot_filename}'")
