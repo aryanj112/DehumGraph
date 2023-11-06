@@ -19,9 +19,8 @@ merged_data = pd.merge(dehum_grouped, runtime_grouped, left_index=True, right_in
 
 plt.figure()
 plt.plot(merged_data["Average Absolute Humidity Zone 1"], merged_data["L/kWh"], 'o', label="Efficiency [L/kWh]", color="tab:blue")
-plt.xlabel("Run Time Absolute Humidity (g/m^3)")
+plt.xlabel("Run Time Absolute Humidity [g/m^3]")
 plt.ylabel("Efficiency [L/kWh]")
-plt.title(f"Efficiency [L/kWh] Vs. Dehum. Running Absolute Humidity (g/m^3) (guestroom)")
+plt.title(f"Efficiency [L/kWh] Vs. Dehum. Running Absolute Humidity [g/m^3] (guestroom)")
 plt.legend()
 plt.show()
-
