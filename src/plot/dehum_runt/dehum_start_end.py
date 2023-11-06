@@ -211,6 +211,6 @@ if __name__ == '__main__':
         ('11/2/23', '11/3/23'),
         ('11/3/23', '11/4/23')
     ]
-
-    for start_date, end_date in date_ranges_p2:
+    last_date = [('11/4/23', '11/5/23')]
+    for start_date, end_date in last_date:
         dehum_start_end(start_date, end_date, 'Y')  
