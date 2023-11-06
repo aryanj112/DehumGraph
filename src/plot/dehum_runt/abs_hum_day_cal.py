@@ -1,7 +1,9 @@
+#Averages abs hum per day based on the runtime
+
 import pandas as pd
 import numpy as np
 
-ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_Absolute.csv")
+ambient = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_Absolute_NEW.csv")
 ambient["Time"] = pd.to_datetime(ambient["Time"], format="%m/%d/%y %H:%M")
 run_times = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\dehum_runtimes_update.csv")
 
@@ -28,15 +30,9 @@ def calculate_mean(row, zone):
 run_times['Average Absolute Humidity Zone 1'] = run_times.apply(lambda row: calculate_mean(row, 1), axis=1)
 run_times['Average Absolute Humidity Zone 2'] = run_times.apply(lambda row: calculate_mean(row, 2), axis=1)
 
-# Reset the index to make it easier to access
-
-
-# Reset the index to make it easier to access
-
 run_times['Date_Only'] = run_times['Date'].dt.date
 grouped = run_times.set_index('Date_Only')
-grouped = run_times.set_index('Date')
 grouped.fillna(0)
-plot_filename = fr'C:\Users\ajayj\DehumGraph\data\dehum_rt_avg_AH_new.csv'
+plot_filename = fr'dehum_rt_avg_AH_new.csv'
 grouped.to_csv(plot_filename, index=False)
 print(f"Plot saved as '{plot_filename}'")
