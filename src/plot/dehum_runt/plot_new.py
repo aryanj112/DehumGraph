@@ -39,8 +39,8 @@ plt.ylabel("Efficiency [L/kWh]")
 plt.title(f"Efficiency Vs. Absolute Humidity while Dehum. is running (guestroom)")
 plt.legend()
 plt.tight_layout()
-plt.ylim(0,2)
-plt.xlim(10,15)
+#plt.ylim(0.25,1.75)
+#plt.xlim(10.4,14.7)
 
 plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\others\eff_vs_hum_runt_controls.png'
 plt.savefig(plot_filename, dpi=500, bbox_inches='tight')   
