@@ -37,8 +37,8 @@ plt.xlabel("Average Absolute Humidity")
 plt.ylabel("Efficiency [L/kWh]")
 plt.title("Efficiency Vs. Absolute Humidity while Dehum. is running (guestroom)")
 plt.legend()
-#plt.ylim(0,2)
-#plt.xlim(10,15)
+plt.ylim(0,2)
+plt.xlim(10,15)
 plt.tight_layout()
 
 

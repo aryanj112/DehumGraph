@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-easy_eff_abshum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\efficiency\Easy_Eff_Avg_AbsHum_New.csv")
+easy_eff_abshum = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\efficiency\Fit Data Set - Sheet1.csv")
 
 internal_color = "blue"
 external_color = "red"
