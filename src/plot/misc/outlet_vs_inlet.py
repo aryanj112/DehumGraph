@@ -73,11 +73,14 @@ def day_average(input_date):
     else:
         overall_avg_inlet = nancheck[2]  # Set to the non-zero value or 0 if both are 0
 
-
-
     return overall_avg_inlet - overall_avg_outlet
 
-if __name__ == '__main__':
-    input_date = input("Enter date (e.g., 7/18/2023): ")
-    print("Average Humidity(%) of the Deh(in) - Deh(out): ")
-    print(day_average(input_date))
+for date in dehum["Date"]:
+    result = day_average(date)
+    print(f"{date}, {result}")
+
+
+#if __name__ == '__main__':
+    #input_date = input("Enter date (e.g., 7/18/2023): ")
+    #print("Average Humidity(%) of the Deh(in) - Deh(out): ")
+    #print(day_average(input_date))
