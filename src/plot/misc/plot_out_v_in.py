@@ -10,30 +10,32 @@ data['Date'] = pd.to_datetime(data['Date'])
 
 # Plotting
 plt.scatter(data[data['Model'] == 'internal']['Avg Rel Hum Deh(in) - Deh(out)'],
-            data[data['Model'] == 'internal']['Efficiency'],
+            data[data['Model'] == 'internal']['L/kWh'],
             color='blue', label='Internal')
 
 plt.scatter(data[data['Model'] == 'external']['Avg Rel Hum Deh(in) - Deh(out)'],
-            data[data['Model'] == 'external']['Efficiency'],
+            data[data['Model'] == 'external']['L/kWh'],
             color='red', label='External')
 
 plt.xlabel('Avg Rel Hum Deh(in) - Deh(out)')
-plt.ylabel('Efficiency')
+plt.ylabel('L/kWh')
 plt.legend()
 plt.show()
 
+'''
 # Linear Regression
 internal_data = data[data['Model'] == 'internal']
 external_data = data[data['Model'] == 'external']
 
 X_internal = internal_data['Avg Rel Hum Deh(in) - Deh(out)'].values.reshape(-1, 1)
-y_internal = internal_data['Efficiency'].values
+y_internal = internal_data['L/kWh'].values
 
 X_external = external_data['Avg Rel Hum Deh(in) - Deh(out)'].values.reshape(-1, 1)
-y_external = external_data['Efficiency'].values
+y_external = external_data['L/kWh'].values
 
 model_internal = LinearRegression().fit(X_internal, y_internal)
 model_external = LinearRegression().fit(X_external, y_external)
 
 print('Internal Coefficients:', model_internal.coef_, model_internal.intercept_)
 print('External Coefficients:', model_external.coef_, model_external.intercept_)
+'''
