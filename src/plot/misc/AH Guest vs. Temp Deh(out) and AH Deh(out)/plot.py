@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
 
-
 def plot(start_date, end_date, write):
     guestroom = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Main Data\Base(guest).csv")
     outlet = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Main Data\Deh(out).csv")
@@ -44,6 +43,7 @@ def plot(start_date, end_date, write):
     ax1.legend(loc="upper left")
     ax2.legend(loc="upper right")
 
+    # Manually adjust layout after plt.show()
     plt.tight_layout()
 
     if write == 'Y':
@@ -53,8 +53,9 @@ def plot(start_date, end_date, write):
         plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\humvtemprel\{start_date_str}_GuestHum_n_Temp@Deh_Out_vs_Time.png'
         plt.savefig(plot_filename, dpi=500, bbox_inches='tight')
         print(f"Plot saved as '{plot_filename}'")
+    
+    plt.show()
 
-    #plt.show()
 
 if __name__ == '__main__':
 
@@ -204,5 +205,5 @@ if __name__ == '__main__':
     ONEdate_ranges = [
         ('6/18/23', '6/19/23')]
 
-    for start_date, end_date in ONEdate_ranges:
-        plot(start_date, end_date, 'Y')
+    for start_date, end_date in date_ranges:
+        plot(start_date, end_date, 'N')
