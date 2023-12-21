@@ -19,8 +19,14 @@ def custom_row(var, file_path):
     data_set.replace("--", np.nan, inplace = True)       
     numeric_columns = data_set.columns.difference(['Time'])
     data_set[numeric_columns] = data_set[numeric_columns].apply(pd.to_numeric, errors='coerce')
-    data_set.dropna(inplace=True)
-    data_set['Time'] = pd.to_datetime(data_set['Time'], format="%m/%d/%y %H:%M")
-    var = data_set[var]
-    new_data_set = data_set[['Time', var]].copy()
-    return var, new_data_set
+    #data_set.dropna(inplace=True)
+    data_set["Time"] = pd.to_datetime(data_set['Time'], format="%m/%d/%y %H:%M")
+    var = data_set[["Time", var]].copy()
+    return var, data_set
+
+def merge_time(x,y,x_label,y_label):
+    daily_avg = x.groupby(x['Time'].dt.date)[x_label].mean()
+    y_grouped = y.groupby("Time")[y_label].mean()
+    merged_data = pd.merge(y_grouped, daily_avg, left_index=True, right_index=True, how="left")
+    merged_data.dropna(inplace=True)
+    return merged_data
