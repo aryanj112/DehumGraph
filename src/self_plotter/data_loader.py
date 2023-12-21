@@ -22,4 +22,5 @@ def custom_row(var, file_path):
     data_set.dropna(inplace=True)
     data_set['Time'] = pd.to_datetime(data_set['Time'], format="%m/%d/%y %H:%M")
     var = data_set[var]
-    return var, data_set
+    new_data_set = data_set[['Time', var]].copy()
+    return var, new_data_set
