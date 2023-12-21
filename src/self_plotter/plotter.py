@@ -13,9 +13,10 @@ def add_vertical_line():
 
     return 0
 
-def add_secondary_axis():
-
-    return 0
+def add_secondary_axis(fig, ax1, x, y, y_label):
+    ax2 = ax1.twinx()
+    ax2.plot(x,y,"o", label = y_label, color="tab:purple")
+    return fig, ax1
 
 def add_tertiary_axis():
     return 0
