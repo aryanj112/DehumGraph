@@ -22,10 +22,9 @@ def add_tertiary_axis():
     return 0
 
 def save_plot(title):
-    plot_filename = fr"C:\Users\ajayj\DehumGraph\plots\plotter\{title}"
+    plot_filename = fr"C:\Users\ajayj\DehumGraph\plots\plotter\{title}.png"
     plt.savefig(plot_filename, dpi=500, bbox_inches='tight')
     print(f"Plot saved as '{plot_filename}'")
-    return 0
 
 def show_plot():
     plt.tight_layout()
