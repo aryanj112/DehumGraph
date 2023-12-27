@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 def basic_plot(x, y, x_label, y_label, title):
     fig, ax1 = plt.subplots()
-    ax1.plot(x,y,"-", label = y_label, color="tab:blue")
+    ax1.plot(x,y,"o", label = y_label, color="tab:blue")
     ax1.set_xlabel(x_label)
     ax1.set_ylabel(y_label)
     ax1.set_title(title)

@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-def data_loader (x, y, file_path):
+def data_loader (x_label, y_label, file_path):
     data_set = pd.read_csv(file_path)
     data_set.replace("---.-", np.nan, inplace = True)
     data_set.replace("--", np.nan, inplace = True)       
@@ -9,8 +9,8 @@ def data_loader (x, y, file_path):
     data_set[numeric_columns] = data_set[numeric_columns].apply(pd.to_numeric, errors='coerce')
     data_set.dropna(inplace=True)
     data_set['Time'] = pd.to_datetime(data_set['Time'], format="%m/%d/%y %H:%M")
-    x = data_set[x]
-    y = data_set[y]
+    x = data_set[x_label]
+    y = data_set[y_label]
     return x, y, data_set
 
 def custom_row(var, file_path):
