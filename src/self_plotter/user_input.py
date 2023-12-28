@@ -104,16 +104,16 @@ def get_user_input():
         file_path_two = FILE_CONFIG[second_loc]
         x_label = var_var[0]
         y_label = var_var[1]
-        title = y_label + " vs. " + x_label
 
-        if(first_loc == "Dehum" or second_loc == "Dehum"):
-            x,data_set1 = custom_row(x_label, file_path_one)
-            y,data_set1 = custom_row(y_label, file_path_two)
-            merge = merge_time(x,y,x_label,y_label)
+        x, data_set1 = custom_row(x_label, file_path_one)
+        y, data_set2 = custom_row(y_label, file_path_two)
+
+        title = f"{y_label} vs. {x_label}"
+
+        if first_loc == "Dehum" or second_loc == "Dehum":
+            merge = merge_time(x, y, x_label, y_label)
             fig, ax1 = basic_plot(merge[x_label], merge[y_label], x_label, y_label, title)
         else:
-            x,datasetx = custom_row(x_label, file_path_one)
-            y,datasety = custom_row(y_label, file_path_two)
             fig, ax1 = basic_plot(x, y, x_label, y_label, title)
 
         show_plot()
