@@ -65,15 +65,14 @@ def get_user_input():
             type_writer("Do you want to add a secondary axis? [Y] or [N]")
             y2 = input()
             if (y2 == "Y"):
+                
                 type_writer("Do you want to add a tertiary axis? [Y] or [N]")
                 y3 = input
             elif (y2 == "N"):
                 x_label = 'Time'
                 y_label = plot_var
-                
                 key_in_file_config = nick_name[loc]
                 file_path = file_config[key_in_file_config]
-
                 x, y, dataset = data_loader (x_label, y_label, file_path)
                 title = f"{y_label} vs. {x_label} at {loc}"
                 basic_plot(x, y, x_label, y_label, title)
