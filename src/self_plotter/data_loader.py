@@ -31,5 +31,5 @@ def merge_time(x,y,x_label,y_label):
     daily_avg = x.groupby(x['Time'].dt.date)[x_label].mean()
     y_grouped = y.groupby("Time")[y_label].mean()
     merged_data = pd.merge(y_grouped, daily_avg, left_index=True, right_index=True, how="left")
-    merged_data.dropna(inplace=True)
+    #merged_data.dropna(inplace=True)
     return merged_data
