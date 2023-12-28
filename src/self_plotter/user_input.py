@@ -19,6 +19,24 @@ FILE_CONFIG = {
     'Dehum': r"C:\Users\ajayj\DehumGraph\data\Main Data\Dehum.csv",
 }
 
+def potential_vars (loc):
+    
+    ambient_vars = ["Temperature(F)", "Humidity(%)", "Dewpoint(F)", "HeatIndex(F)", "Absolute Humidity(g/m^3)"]
+    dehum_vars = ["L/kWh", "Avg Abs Hum", "Avg Rel Hum Deh(in) - Deh(out)"]
+    
+    type_writer(f"Here are the potential variables you can plot for {loc}:")
+    
+    if loc in ["FR_DOOR", "BASE", "Input", "Output"]:
+        for var in ambient_vars:
+            type_writer(f"- [{var}]")
+
+    elif loc == "Dehum":
+        for var in dehum_vars:
+            type_writer(f"- [{var}]")
+
+    var = input("Select a variable: ")
+    return var
+
 def type_writer(text, delay=0.0):
     for char in text:
         print(char, end='', flush=True)
@@ -115,58 +133,42 @@ def get_user_input():
         loc = [first_loc, second_loc]
         var_var = []
         for single_loc in loc:
-            if single_loc in ["FR_DOOR", "BASE", "Input", "Output"]:
-                type_writer(f"Here are the potential variables you can plot for {single_loc}:")
-                type_writer("- [Temperature(F)]")
-                type_writer("- [Humidity(%)]")
-                type_writer("- [Dewpoint(F)]")
-                type_writer("- [HeatIndex(F)]")
-                type_writer("- [Absolute Humidity(g/m^3)]")
-                plot_var = input("Select a variable: ")
-                var_var.append(plot_var)
+            plot_var = potential_vars(single_loc)
+            var_var.append(plot_var)
                 
-                '''
-                type_writer("Indicate a time zone you would like to plot these on: ")
-                #start_date = input()
-                #end_date = input()
-                
-                type_writer("Do you want to add a secondary axis? [Y] or [N]")
-                add_secondary = input()
-                if add_secondary == "Y":
-                    type_writer("Do you want to add a tertiary axis? [Y] or [N]")
-                    add_tertiary = input()
-                elif add_secondary == "N":
-                    print("TO BE DONE")
-                else:
-                    print('Invalid choice')
+            '''
+            type_writer("Indicate a time zone you would like to plot these on: ")
+            #start_date = input()
+            #end_date = input()
+            
+            type_writer("Do you want to add a secondary axis? [Y] or [N]")
+            add_secondary = input()
+            if add_secondary == "Y":
+                type_writer("Do you want to add a tertiary axis? [Y] or [N]")
+                add_tertiary = input()
+            elif add_secondary == "N":                    
+                print("TO BE DONE")
+            else:
+                print('Invalid choice')
 
-                '''
-
-            elif single_loc == "Dehum":
-                type_writer(f"Here are the potential variables you can plot for {single_loc}:")
-                type_writer("- [L/kWh]")
-                type_writer("- [Avg Abs Hum]")
-                type_writer("- [Avg Rel Hum Deh(in) - Deh(out)]")
-                plot_var = input("Select a variable: ")
-                var_var.append(plot_var)
+            '''
+            
                 
-                '''
-                type_writer("Indicate a time zone you would like to plot these on: ")
-                #start_date = input()
-                #end_date = input()     
-                
-                type_writer("Do you want to add a secondary axis? [Y] or [N]")
-                add_secondary = input()
-                if add_secondary == "Y":
-                    type_writer("Do you want to add a tertiary axis? [Y] or [N]")
-                    add_tertiary = input()
-                elif add_secondary == "N":
-                    print("TO BE DONE")
-                else:
-                    print('Invalid choice')
-                '''
-        else:
-            print('Invalid location')
+            '''
+            type_writer("Indicate a time zone you would like to plot these on: ")
+            #start_date = input()
+            #end_date = input()     
+            
+            type_writer("Do you want to add a secondary axis? [Y] or [N]")
+            add_secondary = input()
+            if add_secondary == "Y":
+                type_writer("Do you want to add a tertiary axis? [Y] or [N]")
+                add_tertiary = input()
+            elif add_secondary == "N":
+                print("TO BE DONE")
+            else:
+                print('Invalid choice')
+            '''
         
         file_path_one = FILE_CONFIG[first_loc]
         file_path_two = FILE_CONFIG[second_loc]
