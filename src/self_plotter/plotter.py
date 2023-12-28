@@ -13,13 +13,16 @@ def add_vertical_line():
 
     return 0
 
-def add_secondary_axis(fig, ax1, x, y, y_label):
+def add_secondary_axis(fig, ax1, x, y, y2_label):
     ax2 = ax1.twinx()
-    ax2.plot(x,y,"-", label = y_label, color="tab:purple")
+    ax2.plot(x,y,"-", label = y2_label, color="tab:purple")
     return fig, ax1
 
-def add_tertiary_axis():
-    return 0
+def add_tertiary_axis(fig, ax1, x, y, y3_label):
+    
+    ax3 = ax1.twinx()
+    ax3.plot(x,y,"-", label = y3_label, color="tab:red")
+    return fig, ax1
 
 def save_plot(title):
     plot_filename = fr"C:\Users\ajayj\DehumGraph\plots\plotter\{title}.png"
