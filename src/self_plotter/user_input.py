@@ -10,8 +10,7 @@ FILE_CONFIG = {
     'Dehum': r"C:\Users\ajayj\DehumGraph\data\Main Data\Dehum.csv",
 }
 
-def type_potential_vars (loc):
-    
+def type_potential_vars(loc):
     ambient_vars = ["Temperature(F)", "Humidity(%)", "Dewpoint(F)", "HeatIndex(F)", "Absolute Humidity(g/m^3)"]
     dehum_vars = ["L/kWh", "Avg Abs Hum", "Avg Rel Hum Deh(in) - Deh(out)"]
     
@@ -20,7 +19,6 @@ def type_potential_vars (loc):
     if loc in ["FR_DOOR", "BASE", "Input", "Output"]:
         for var in ambient_vars:
             type_writer(f"- [{var}]")
-
     elif loc == "Dehum":
         for var in dehum_vars:
             type_writer(f"- [{var}]")
@@ -42,24 +40,32 @@ def type_writer(text, delay=0.0):
     print()
 
 def get_user_input():
-    type_writer("Welcome to the  Dehumidifier Graph program.")
+    # Introduction
+    type_writer("Welcome to the Dehumidifier Graph program.")
     type_writer("Here, you can visualize data from different sources, including:")
     type_data_sources()
     type_writer("\nExplore and plot various pieces of information with ease!")
+
+    # User's choice: var_time or var_var
     type_writer("\nTo begin, would you prefer to view the trend of a variable over time [var_time] or compare that variable against another variable? [var_var]")
     type_writer("Note: Choices are indicated within square brackets.")
     against = input("[var_time] or [var_var]: ")
 
     if against == "var_time":
+        # User selects a single location
         type_writer("\nWhere would you like to visualize data:")
         type_data_sources()
         loc = input()
-        plot_var = type_potential_vars (loc)
+        plot_var = type_potential_vars(loc)
+
+        # User decides on secondary and tertiary axes
         type_writer("Do you want to add a secondary axis? [Y] or [N]")
         add_secondary = input()
         if add_secondary == "Y":
             type_writer("Do you want to add a tertiary axis? [Y] or [N]")
             add_tertiary = input()
+
+        # Plot based on user's choices
         elif add_secondary == "N":
             x_label = 'Time'
             y_label = plot_var
@@ -72,6 +78,7 @@ def get_user_input():
             print('Invalid Choice')
 
     elif against == "var_var":
+        # User selects two locations and their respective variables
         type_writer("\n What is the first location you would like to visualize data:")
         type_data_sources()
         first_loc = input()
@@ -79,11 +86,13 @@ def get_user_input():
         second_loc = input()
         loc = [first_loc, second_loc]
         var_var = []
+
         for single_loc in loc:
             plot_var = type_potential_vars(single_loc)
             var_var.append(plot_var)
-                
-            '''
+
+        # TO BE DONE: User input for time zone and additional axes
+        '''
             type_writer("Indicate a time zone you would like to plot these on: ")
             #start_date = input()
             #end_date = input()
@@ -98,8 +107,9 @@ def get_user_input():
             else:
                 print('Invalid choice')
 
-            '''
-        
+        '''
+
+        # Plot based on user's choices
         file_path_one = FILE_CONFIG[first_loc]
         file_path_two = FILE_CONFIG[second_loc]
         x_label = var_var[0]
@@ -121,6 +131,7 @@ def get_user_input():
     else:
         print('Invalid choice')
 
+    return 0
 
-    return 0 #do the vars and plot all the stuff in main
+# Execute the main function
 get_user_input()
