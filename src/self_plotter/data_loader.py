@@ -7,7 +7,8 @@ def data_loader (x_label, y_label, file_path):
     data_set.replace("--", np.nan, inplace = True)       
     numeric_columns = data_set.columns.difference(['Time'])
     data_set[numeric_columns] = data_set[numeric_columns].apply(pd.to_numeric, errors='coerce')
-    data_set.dropna(inplace=True)
+    if(file_path != r"C:\Users\ajayj\DehumGraph\data\Main Data\Dehum.csv"):
+        data_set.dropna(inplace=True)
     data_set['Time'] = pd.to_datetime(data_set['Time'], format="%m/%d/%y %H:%M")
     x = data_set[x_label]
     y = data_set[y_label]
@@ -20,6 +21,8 @@ def custom_row(var, file_path):
     numeric_columns = data_set.columns.difference(['Time'])
     data_set[numeric_columns] = data_set[numeric_columns].apply(pd.to_numeric, errors='coerce')
     #data_set.dropna(inplace=True)
+    if(file_path != r"C:\Users\ajayj\DehumGraph\data\Main Data\Dehum.csv"):
+        data_set.dropna(inplace=True)
     data_set["Time"] = pd.to_datetime(data_set['Time'], format="%m/%d/%y %H:%M")
     var = data_set[["Time", var]].copy()
     return var, data_set

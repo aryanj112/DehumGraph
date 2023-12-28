@@ -1,6 +1,7 @@
 from plotter import basic_plot, show_plot
 import time
 from data_loader import data_loader
+#from config import FILE_CONFIG, NICK_NAME
 
 NICK_NAME = {
     'FR_DOOR': 'front_door_path',
@@ -18,14 +19,14 @@ FILE_CONFIG = {
     'dehumidifier_path': r"C:\Users\ajayj\DehumGraph\data\Main Data\Dehum.csv",
 }
 
-def type_writer(text, delay=0.05):
+def type_writer(text, delay=0.0):
     for char in text:
         print(char, end='', flush=True)
         time.sleep(delay)
     print()
 
 def get_user_input():
-    type_writer("Welcome to the Dehumidifier Graph program.")
+    type_writer("Welcome to the  Dehumidifier Graph program.")
     type_writer("Here, you can visualize data from different sources, including:")
     type_writer("- Front Door [FR_DOOR]")
     type_writer("- Basement [BASE]")
@@ -75,10 +76,61 @@ def get_user_input():
                 print('Invalid choice')
         elif loc == "Dehum":
             type_writer("Here are the potential variables you can plot:")
+            type_writer("- [L/kWh]")
+            type_writer("- [Avg Abs Hum]")
+            type_writer("- [Avg Rel Hum Deh(in) - Deh(out)]")
+            plot_var = input("Select a variable: ")
+            type_writer("Indicate a time zone you would like to plot these on: ")
+            #start_date = input()
+            #end_date = input()     
+            
+            type_writer("Do you want to add a secondary axis? [Y] or [N]")
+            add_secondary = input()
+            if add_secondary == "Y":
+                type_writer("Do you want to add a tertiary axis? [Y] or [N]")
+                add_tertiary = input()
+            elif add_secondary == "N":
+                x_label = 'Time'
+                y_label = f'{plot_var}'
+                key_in_file_config = NICK_NAME[loc]
+                file_path = FILE_CONFIG[key_in_file_config]
+                print(file_path)
+                x, y, dataset = data_loader(x_label, y_label, file_path)
+                print(x, y)
+
+                title = f"{y_label} vs. {x_label} at {loc}"
+                basic_plot(x, y, x_label, y_label, title)
+                show_plot()
+            else:
+                print('Invalid choice')
         else:
             print('Invalid location')
+
     elif against == "var_var":
         print("Not implemented yet")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     else:
         print('Invalid choice')
 
