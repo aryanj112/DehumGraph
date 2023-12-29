@@ -10,28 +10,44 @@ FILE_CONFIG = {
     'Dehum': r"C:\Users\ajayj\DehumGraph\data\Main Data\Dehum.csv",
 }
 
+NUM_CONFIG = {
+    '1': 'FR_DOOR',
+    '2': 'BASE',
+    '3': 'Input', 
+    '4': 'Output',
+    '5': 'Dehum',
+    '6': 'Temperature(F)',
+    '7': 'Humidity(%)',
+    '8': 'Dewpoint(F)',
+    '9': 'HeatIndex(F)',
+    '10': 'Absolute Humidity(g/m^3)',
+    '11': 'L/kWh',
+    '12': 'Avg Abs Hum',
+    '13': 'Avg Rel Hum Deh(in) - Deh(out)',
+}
+
 def type_potential_vars(loc):
-    ambient_vars = ["Temperature(F)", "Humidity(%)", "Dewpoint(F)", "HeatIndex(F)", "Absolute Humidity(g/m^3)"]
-    dehum_vars = ["L/kWh", "Avg Abs Hum", "Avg Rel Hum Deh(in) - Deh(out)"]
+    ambient_vars = ["Temperature(F) [6]", "Humidity(%) [7]", "Dewpoint(F) [8]", "HeatIndex(F) [9]", "Absolute Humidity(g/m^3) [10]"]
+    dehum_vars = ["L/kWh [11]", "Avg Abs Hum [12]", "Avg Rel Hum Deh(in) - Deh(out) [13]"]
     
     type_writer(f"Here are the potential variables you can plot for {loc}:")
     
     if loc in ["FR_DOOR", "BASE", "Input", "Output"]:
         for var in ambient_vars:
-            type_writer(f"- [{var}]")
+            type_writer(f"- {var}")
     elif loc == "Dehum":
         for var in dehum_vars:
-            type_writer(f"- [{var}]")
+            type_writer(f"- {var}")
 
     var = input("Select a variable: ")
     return var
 
 def type_data_sources():
-    type_writer("- Front Door [FR_DOOR]")
-    type_writer("- Basement [BASE]")
-    type_writer("- Dehumidifier Input [Input]")
-    type_writer("- Dehumidifier Output [Output]")
-    type_writer("- Dehumidifier [Dehum]")
+    type_writer("- Front Door [1]")
+    type_writer("- Basement [2]")
+    type_writer("- Dehumidifier Input [3]")
+    type_writer("- Dehumidifier Output [4]")
+    type_writer("- Dehumidifier [5]")
 
 def type_writer(text, delay=0.0):
     for char in text:
@@ -56,7 +72,7 @@ def get_user_input():
         type_writer("\nWhere would you like to visualize data:")
         type_data_sources()
         loc = input()
-        plot_var = type_potential_vars(loc)
+        plot_var = type_potential_vars(NUM_CONFIG[loc])
 
         # User decides on secondary and tertiary axes
         type_writer("Do you want to add a secondary axis? [Y] or [N]")
@@ -69,7 +85,7 @@ def get_user_input():
         elif add_secondary == "N":
             x_label = 'Time'
             y_label = plot_var
-            file_path = FILE_CONFIG[loc]
+            file_path = FILE_CONFIG[NUM_CONFIG[loc]]
             x, y, dataset = data_loader(x_label, y_label, file_path)
             title = f"{y_label} vs. {x_label} at {loc}"
             basic_plot(x, y, x_label, y_label, title)
@@ -88,30 +104,30 @@ def get_user_input():
         var_var = []
 
         for single_loc in loc:
-            plot_var = type_potential_vars(single_loc)
-            var_var.append(plot_var)
+            plot_var = type_potential_vars(NUM_CONFIG[single_loc])
+            var_var.append(NUM_CONFIG[plot_var])
 
         # TO BE DONE: User input for time zone and additional axes
         '''
-            type_writer("Indicate a time zone you would like to plot these on: ")
-            #start_date = input()
-            #end_date = input()
-            
-            type_writer("Do you want to add a secondary axis? [Y] or [N]")
-            add_secondary = input()
-            if add_secondary == "Y":
-                type_writer("Do you want to add a tertiary axis? [Y] or [N]")
-                add_tertiary = input()
-            elif add_secondary == "N":                    
-                print("TO BE DONE")
-            else:
-                print('Invalid choice')
-
+        type_writer("Indicate a time zone you would like to plot these on: ")
+        #start_date = input()
+        #end_date = input()
+        
+        type_writer("Do you want to add a secondary axis? [Y] or [N]")
+        add_secondary = input()
+        if add_secondary == "Y":
+            type_writer("Do you want to add a tertiary axis? [Y] or [N]")
+            add_tertiary = input()
+        elif add_secondary == "N":                    
+            print("TO BE DONE")
+        else:
+            print('Invalid choice')
         '''
 
         # Plot based on user's choices
-        file_path_one = FILE_CONFIG[first_loc]
-        file_path_two = FILE_CONFIG[second_loc]
+
+        file_path_one = FILE_CONFIG[NUM_CONFIG[first_loc]]
+        file_path_two = FILE_CONFIG[NUM_CONFIG[second_loc]]
         x_label = var_var[0]
         y_label = var_var[1]
 
