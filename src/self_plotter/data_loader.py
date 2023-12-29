@@ -27,9 +27,19 @@ def custom_row(var, file_path):
     var = data_set[["Time", var]].copy()
     return var, data_set
 
-def merge_time(x,y,x_label,y_label):
-    daily_avg = x.groupby(x['Time'].dt.date)[x_label].mean()
-    y_grouped = y.groupby("Time")[y_label].mean()
-    merged_data = pd.merge(y_grouped, daily_avg, left_index=True, right_index=True, how="left")
-    #merged_data.dropna(inplace=True)
+def merge_time(x, y, x_label, y_label, average_overlapping=False):
+
+    if average_overlapping:
+        # Merge on date and time, and calculate the mean for overlapping values
+        daily_avg = x.groupby(x['Time'].dt.date)[x_label].mean()
+        y_grouped = y.groupby(y['Time'].dt.date)[y_label].mean()
+        merged_data = pd.merge(y_grouped, daily_avg, left_index=True, right_index=True, how="left")
+        merged_data.dropna(inplace=True)
+    
+    else:
+        # Merge on date and time without averaging
+        merged_data = pd.merge(y, x, on='Time', how='left')
+        merged_data = merged_data[['Time', x_label, y_label]].dropna().reset_index(drop=True)
+        merged_data.columns = ['Time', x_label, y_label]
+
     return merged_data

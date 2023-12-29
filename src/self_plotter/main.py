@@ -11,6 +11,10 @@ dehumdidifier = r"C:\Users\ajayj\DehumGraph\data\Main Data\Dehum.csv"
 x_label = "Time"
 y_label= "L/kWh"
 
+x,y,dataset = data_loader(x_label, y_label,dehumdidifier)
+fig, ax1 = basic_plot(x, y, x_label, y_label, f"{y_label} vs. {x_label}")
+show_plot()
+
 #x,data_set1 = custom_row(x_label, dehum_output)
 
 #x,data_set1 = custom_row(x_label, basement_guest)
@@ -24,8 +28,7 @@ y_label= "L/kWh"
 
 #x,y,dataset = data_loader(x_label, y_label,dehumdidifier)
 
-x,y,dataset = data_loader(x_label, y_label,dehumdidifier)
-fig, ax1 = basic_plot(x, y, x_label, y_label, f"{y_label} vs. {x_label}")
+
 
 #y,data_set2 = custom_row(y_label, dehumdidifier)
 #merge = merge_time(x,y,x_label,y_label)
@@ -43,4 +46,3 @@ fig, ax1 = basic_plot(x, y, x_label, y_label, f"{y_label} vs. {x_label}")
 #add_secondary_axis(fig, ax1, x, y, y2_label)
 #save_plot(title)
 
-show_plot()

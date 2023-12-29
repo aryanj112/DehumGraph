@@ -121,15 +121,18 @@ def get_user_input():
         title = f"{y_label} vs. {x_label}"
 
         if first_loc == "Dehum" or second_loc == "Dehum":
-            merge = merge_time(x, y, x_label, y_label)
-            fig, ax1 = basic_plot(merge[x_label], merge[y_label], x_label, y_label, title)
+            overlap_bool=True
         else:
-            fig, ax1 = basic_plot(x, y, x_label, y_label, title)
+            overlap_bool=False
+
+        merge = merge_time(x, y, x_label, y_label,  average_overlapping=overlap_bool)
+        fig, ax1 = basic_plot(merge[x_label], merge[y_label], x_label, y_label, title)
 
         show_plot()
 
     else:
         print('Invalid choice')
+    
 
     return 0
 
