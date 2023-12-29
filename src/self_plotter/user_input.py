@@ -56,18 +56,19 @@ def type_writer(text, delay=0.0):
     print()
 
 def get_user_input():
+    
     # Introduction
     type_writer("Welcome to the Dehumidifier Graph program.")
     type_writer("Here, you can visualize data from different sources, including:")
     type_data_sources()
-    type_writer("\nExplore and plot various pieces of information with ease!")
+    type_writer("Explore and plot various pieces of information with ease!")
 
     # User's choice: var_time or var_var
-    type_writer("\nTo begin, would you prefer to view the trend of a variable over time [var_time] or compare that variable against another variable? [var_var]")
+    type_writer("\nTo begin, would you prefer to view the trend of a variable over time [var_vs_time] or compare that variable against another variable? [var_vs_var]")
     type_writer("Note: Choices are indicated within square brackets.")
-    against = input("[var_time] or [var_var]: ")
+    against = input("[var_vs_time] or [var_vs_var]: ")
 
-    if against == "var_time":
+    if against == "var_vs_time":
         # User selects a single location
         type_writer("\nWhere would you like to visualize data:")
         type_data_sources()
@@ -93,19 +94,19 @@ def get_user_input():
         else:
             print('Invalid Choice')
 
-    elif against == "var_var":
+    elif against == "var_vs_var":
         # User selects two locations and their respective variables
-        type_writer("\n What is the first location you would like to visualize data:")
+        type_writer("\nWhat is the first location you would like to visualize data:")
         type_data_sources()
-        first_loc = input()
-        type_writer("\n What is the second location you would like to visualize data:")
-        second_loc = input()
+        first_loc = input("\nFirst Location: ")
+        type_writer("\nWhat is the second location you would like to visualize data:")
+        second_loc = input("Second Location: ")
         loc = [first_loc, second_loc]
-        var_var = []
+        plot_vars = []
 
         for single_loc in loc:
             plot_var = type_potential_vars(NUM_CONFIG[single_loc])
-            var_var.append(NUM_CONFIG[plot_var])
+            plot_vars.append(NUM_CONFIG[plot_var])
 
         # TO BE DONE: User input for time zone and additional axes
         '''
@@ -128,8 +129,8 @@ def get_user_input():
 
         file_path_one = FILE_CONFIG[NUM_CONFIG[first_loc]]
         file_path_two = FILE_CONFIG[NUM_CONFIG[second_loc]]
-        x_label = var_var[0]
-        y_label = var_var[1]
+        x_label = plot_vars[0]
+        y_label = plot_vars[1]
 
         x, data_set1 = custom_row(x_label, file_path_one)
         y, data_set2 = custom_row(y_label, file_path_two)
