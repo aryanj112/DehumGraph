@@ -1,6 +1,6 @@
 from plotter import basic_plot, show_plot
 import time
-from data_loader import data_loader, merge_time, custom_row
+from data_loader import data_loader, merge_time, custom_row, merge_dehum
 
 FILE_CONFIG = {
     'FR_DOOR': r"C:\Users\ajayj\DehumGraph\data\Main Data\Frontdoor.csv",
@@ -137,13 +137,20 @@ def get_user_input():
 
         title = f"{y_label} vs. {x_label}"
 
-        if first_loc == "Dehum" or second_loc == "Dehum":
-            overlap_bool=True
+        if NUM_CONFIG[first_loc] == "Dehum":
+            dehum_loc = "x"
+        elif NUM_CONFIG[second_loc] == "Dehum":
+            dehum_loc = "y"
         else:
             overlap_bool=False
 
-        merge = merge_time(x, y, x_label, y_label,  average_overlapping=overlap_bool)
-        fig, ax1 = basic_plot(merge[x_label], merge[y_label], x_label, y_label, title)
+        merge = merge_dehum(x, y, x_label, y_label, dehum_val = dehum_loc)
+        print(merge)
+
+        if(dehum_loc == 'x'):
+            fig, ax1 = basic_plot(merge[y_label], merge[x_label], x_label, y_label, title)
+        else:
+            fig, ax1 = basic_plot(merge[x_label], merge[y_label], x_label, y_label, title)
 
         show_plot()
 
