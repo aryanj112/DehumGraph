@@ -6,15 +6,19 @@ Hello! This file is meant to serve as a reference for naming conventions in this
 - Efficiency: Eff
 - L/kWh: LkWh
 - Temperature: Temp
-- Relative Humidity: RelHum
-- Absolute Humidity: AbsHum
-- Dewpoint: DewPt
-- Efficiency: Eff
-- Runtime Efficiency: RunEff
-- Runtime Temperature: RunTemp
-- Relative Humidity: RunRelHum
-- Absolute Humidity: RunAbsHum
-- Dewpoint: RunDewPt
+- Absolute Humidity: AH
+- Relative Humidity: RH
+- Dewpoint: Dew
+- Runtime ___: Run___
+
+## Location Names
+- Dehumidifier Outlet: Out
+- Dehumidifier Inlet: In
+- Guestroom: Guest
+- Front Door: Front
+- Dehumidifier: Dehum
+- Electrical Panel: EPan
+- Weather Station: WxStn
 
 ## File Naming Conventions
 - Single Variable vs. Time: <Variable>_vs_Time_<Location>_<TimePeriod>_<AdditionalInfo>.py
