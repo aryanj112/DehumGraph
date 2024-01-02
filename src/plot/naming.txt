@@ -1,0 +1,29 @@
+# Naming Conventions Reference
+
+Hello! This file is meant to serve as a reference for naming conventions in this project. Below, you'll find variable names and file naming conventions.
+
+## Variable Names
+- Efficiency: Eff
+- L/kWh: LkWh
+- Temperature: Temp
+- Relative Humidity: RelHum
+- Absolute Humidity: AbsHum
+- Dewpoint: DewPt
+- Efficiency: Eff
+- Runtime Efficiency: RunEff
+- Runtime Temperature: RunTemp
+- Relative Humidity: RunRelHum
+- Absolute Humidity: RunAbsHum
+- Dewpoint: RunDewPt
+
+## File Naming Conventions
+- Single Variable vs. Time: <Variable>_vs_Time_<Location>_<TimePeriod>_<AdditionalInfo>.py
+- Two Variables vs. Time: <Variable1>_<Variable2>_vs_Time_<Location>_<TimePeriod>_<AdditionalInfo>.py
+- Three Variables vs. Time: <Variable1>_<Variable2>_<Variable3>_vs_Time_<Location>_<TimePeriod>_<AdditionalInfo>.py
+- One Variable vs. Another: <Variable1>_vs_<Variable2>_<Location>_<TimePeriod>_<AdditionalInfo>.py
+
+### Example:
+- Efficiency_vs_Time_FrontDoor_Jan2023.py
+- Runtime_Efficiency_Temperature_vs_Time_LivingRoom_Aug2023_LinearRegression.py
+- Temp_vs_RelHum_LivingRoom_Sep2023_Annotated.py
+- LkWh_vs_DewPt_Office_Jul2023.py
