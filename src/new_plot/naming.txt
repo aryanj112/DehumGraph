@@ -14,7 +14,7 @@ Hello! This file is meant to serve as a reference for naming conventions in this
 ## Location Names
 - Dehumidifier Outlet: Out
 - Dehumidifier Inlet: In
-- Guestroom: Guest
+- Basement Guestroom: BaseGuest
 - Front Door: Front
 - Dehumidifier: Dehum
 - Electrical Panel: EPan
