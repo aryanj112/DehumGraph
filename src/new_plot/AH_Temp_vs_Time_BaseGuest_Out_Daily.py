@@ -210,8 +210,8 @@ if __name__ == '__main__':
         ('11/4/23', '11/5/23')
     ]
     
-    ONEdate_ranges = [
-        ('6/18/23', '6/19/23')]
+    test = [
+        ('6/18/19', '6/19/19')]
 
     for start_date, end_date in date_ranges:
         plot(start_date, end_date, 'N')
