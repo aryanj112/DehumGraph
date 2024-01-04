@@ -3,42 +3,42 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
 
-def load_data():
+def load_data(start_date, end_date):
 
     # Read the Dataframes
     guestroom = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Base(guest).csv")
-    outlet = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Deh(out).csv")
+    out = pd.read_csv(r"C:\Users\ajayj\DehumGraph\data\Deh(out).csv")
 
     # Clean the DataFrames
     guestroom.replace("--", np.nan, inplace=True)
-    guestroom['Absolute Humidity(g/m^3)'] = pd.to_numeric(guestroom['Absolute Humidity(g/m^3)'], errors='coerce')
+    guestroom['Humidity(%)'] = pd.to_numeric(guestroom['Humidity(%)'], errors='coerce')
     guestroom.dropna(inplace=True)
-    outlet.replace("--", np.nan, inplace=True)
-    outlet['Temperature(F)'] = pd.to_numeric(outlet['Temperature(F)'], errors='coerce')
-    outlet.dropna(inplace=True)
+    out.replace("--", np.nan, inplace=True)
+    out['Temperature(F)'] = pd.to_numeric(out['Temperature(F)'], errors='coerce')
+    out.dropna(inplace=True)
 
     # Convert the 'Time' column to datetime format
     guestroom['Time'] = pd.to_datetime(guestroom['Time'], format="%m/%d/%y %H:%M")
-    outlet['Time'] = pd.to_datetime(outlet['Time'], format="%m/%d/%y %H:%M")
+    out['Time'] = pd.to_datetime(out['Time'], format="%m/%d/%y %H:%M")
 
     # Filter the DataFrames based on the date range
     guestroom = guestroom[guestroom['Time'].between(start_date, end_date)]
-    outlet = outlet[outlet['Time'].between(start_date, end_date)]
+    out = out[out['Time'].between(start_date, end_date)]
 
-    return guestroom, outlet
+    return guestroom, out
 
 def plot(start_date, end_date, write):
 
-    guestroom, outlet = load_data()
+    guestroom, out = load_data(start_date, end_date)
     fig, ax1 = plt.subplots()
 
-    ax1.plot(guestroom["Time"], guestroom["Absolute Humidity(g/m^3)"], '-', label="Guestroom Absolute Humidity [g/m^3]", color="tab:purple")
+    ax1.plot(guestroom["Time"], guestroom["Humidity(%)"], '-', label="Guestroom Absolute Humidity [g/m^3]", color="tab:purple")
     ax1.set_xlabel("Date and Time")
     ax1.set_ylabel("Guestroom Absolute Humidity [g/m^3]", color="tab:purple")
 
     # Create a secondary y-axis
     ax2 = ax1.twinx()
-    ax2.plot(outlet["Time"], outlet["Temperature(F)"], '-', label="Deh(out) Temperature [F]", color="tab:orange")
+    ax2.plot(out["Time"], out["Temperature(F)"], '-', label="Deh(out) Temperature [F]", color="tab:orange")
     ax2.set_ylabel("Deh(out) Temperature [F]", color="tab:orange")
 
     plt.title(f"Guestroom Absolute Humidity and Deh(out) Temperature Vs. Time (hourly)  {start_date}")
@@ -46,8 +46,8 @@ def plot(start_date, end_date, write):
     ax1.xaxis.set_major_locator(mdates.HourLocator(interval=2))
     ax1.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
     plt.xticks(rotation=45, ha='right')
+
     # Show legends for both axes
-    
     ax1.legend(loc="upper left")
     ax2.legend(loc="upper right")
 
@@ -67,7 +67,7 @@ def plot(start_date, end_date, write):
 
 if __name__ == '__main__':
 
-    date_ranges = [
+    date_ranges1 = [
         ('6/18/23', '6/19/23'),
         ('6/19/23', '6/20/23'),
         ('6/20/23', '6/21/23'),
@@ -211,7 +211,21 @@ if __name__ == '__main__':
     ]
     
     test = [
-        ('6/18/19', '6/19/19')]
+        ('1/15/19', '1/16/19')]
 
-    for start_date, end_date in date_ranges:
+    #for start_date, end_date in date_ranges1:
+        #print()
+        #plot(start_date, end_date, 'N')
+
+    
+    date_ranges2 = pd.date_range(start='1/15/19', end='1/18/19', freq='D')
+    date_ranges3 = pd.date_range(start='10/9/19', end='11/4/23', freq='D')
+    
+    for date in date_ranges2:
+        start_date = date.strftime('%m/%d/%y')
+        end_date = (date + pd.Timedelta(days=1)).strftime('%m/%d/%y')
+        
+        print(f"\nPlotting for {start_date} to {end_date}")
         plot(start_date, end_date, 'N')
+    
+    
