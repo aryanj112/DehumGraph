@@ -19,13 +19,16 @@ original_data_df['Time'] = pd.to_datetime(original_data_df['Time'])
 filtered_data_df = original_data_df[(original_data_df['Time'] >= start_date) & (original_data_df['Time'] <= end_date)]
 
 # Load the trained Random Forest model
-#model_path = r"C:\Users\ajayj\DehumGraph\models\RandomForestClassifier84.joblib"
+# model_path = r"C:\Users\ajayj\DehumGraph\models\RandomForestClassifier84.joblib"
 model_path = r"C:\Users\ajayj\DehumGraph\models\GirdSearch97.joblib"
 
 loaded_model = joblib.load(model_path)
 
+filtered_data_df['Hour'] = filtered_data_df['Time'].dt.hour
+filtered_data_df['DayOfWeek'] = filtered_data_df['Time'].dt.dayofweek
+
 # Define features for the new data
-X_new = filtered_data_df[['Temperature(F)', 'Humidity(%)', 'Dewpoint(F)', 'HeatIndex(F)', 'Absolute Humidity(g/m^3)']]
+X_new = filtered_data_df[['Temperature(F)', 'Humidity(%)', 'Dewpoint(F)', 'HeatIndex(F)', 'Absolute Humidity(g/m^3)', 'Hour', 'DayOfWeek']]
 
 # Standardize features
 scaler = StandardScaler()
@@ -38,7 +41,7 @@ y_pred_new = loaded_model.predict(X_new_scaled)
 filtered_data_df['Running'] = ['Yes' if pred == 1 else 'No' for pred in y_pred_new]
 
 # Save the updated data to a new CSV file
-#output_csv_path = r"C:\Users\ajayj\DehumGraph\data\old_data_with_running_status.csv"
+# output_csv_path = r"C:\Users\ajayj\DehumGraph\data\old_data_with_running_status.csv"
 output_csv_path = r"C:\Users\ajayj\DehumGraph\data\PredictedRuntime97.csv"
 filtered_data_df.to_csv(output_csv_path, index=False)
 
