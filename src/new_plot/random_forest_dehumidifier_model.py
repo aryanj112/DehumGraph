@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.preprocessing import StandardScaler
+import joblib
 
 # File path for humidity and temperature data
 baseGuestPath = r"C:\Users\ajayj\DehumGraph\data\Base(guest).csv"
@@ -46,3 +47,9 @@ report = classification_report(y_test, y_pred)
 print(f"Accuracy: {accuracy}")
 print("Classification Report:")
 print(report)
+
+# Assuming 'model' is your trained RandomForestClassifier
+model_path = r"C:\Users\ajayj\DehumGraph\models\RandomForestClassifier84.joblib"  # Replace with the desired path and filename
+joblib.dump(model, model_path)
+
+print(f"Model saved to: {model_path}")
