@@ -20,6 +20,8 @@ filtered_data_df = original_data_df[(original_data_df['Time'] >= start_date) & (
 
 # Load the trained Random Forest model
 model_path = r"C:\Users\ajayj\DehumGraph\models\RandomForestClassifier84.joblib"
+model_path = r"C:\Users\ajayj\DehumGraph\models\GirdSearch97.joblib"
+
 loaded_model = joblib.load(model_path)
 
 # Define features for the new data
@@ -36,7 +38,8 @@ y_pred_new = loaded_model.predict(X_new_scaled)
 filtered_data_df['Running'] = ['Yes' if pred == 1 else 'No' for pred in y_pred_new]
 
 # Save the updated data to a new CSV file
-output_csv_path = r"C:\Users\ajayj\DehumGraph\data\old_data_with_running_status.csv"
+#output_csv_path = r"C:\Users\ajayj\DehumGraph\data\old_data_with_running_status.csv"
+output_csv_path = r"C:\Users\ajayj\DehumGraph\data\PredictedRuntime97.csv"
 filtered_data_df.to_csv(output_csv_path, index=False)
 
 print(f"Predictions saved to: {output_csv_path}")
