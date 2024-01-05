@@ -55,20 +55,20 @@ def plot(start_date, end_date, write):
         # Convert start_date to datetime and then to the desired string format
         start_date_str = pd.to_datetime(start_date, format='%m/%d/%y').strftime('%#m/%#d/%y')
         start_date_str = start_date_str.replace('/', '_')
-        plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\humvtemprel\{start_date_str}_Humidity_n_RunningStatus_vs_Time.png'
+        plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\oldrunahguest\{start_date_str}_AH_vs_Time_Guest_Daily_modeldata.png'
         plt.savefig(plot_filename, dpi=500, bbox_inches='tight')
         print(f"Plot saved as '{plot_filename}'")
     
-    plt.show()
+    #plt.show()
 
 if __name__ == '__main__':
 
     date_ranges1 = pd.date_range(start='1/15/19', end='1/18/19', freq='D')
-    date_ranges2 = pd.date_range(start='3/1/20', end='11/4/23', freq='D')
+    date_ranges2 = pd.date_range(start='10/9/19', end='11/4/23', freq='D')
     
     for date in date_ranges2:
         start_date = date.strftime('%m/%d/%y')
         end_date = (date + pd.Timedelta(days=1)).strftime('%m/%d/%y')
         
         print(f"\nPlotting for {start_date} to {end_date}")
-        plot(start_date, end_date, 'N')
+        plot(start_date, end_date, 'Y')
