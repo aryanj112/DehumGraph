@@ -7,6 +7,7 @@ import joblib
 
 # File path for humidity and temperature data
 baseGuestPath = r"C:\Users\ajayj\DehumGraph\data\Base(guest).csv"
+frontDoorPath = r"C:\Users\ajayj\DehumGraph\data\Frontdoor.csv"
 
 combined_data_df = pd.read_csv(baseGuestPath)
 
