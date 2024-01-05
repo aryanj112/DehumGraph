@@ -3,6 +3,12 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
 
+
+var = "Absolute Humidity(g/m^3)"
+var2 = "Humidity(%)"
+
+
+
 def load_data(start_date, end_date):
 
     # Read the Dataframes
@@ -11,12 +17,15 @@ def load_data(start_date, end_date):
 
     # Clean the DataFrames
     guestroom.replace("--", np.nan, inplace=True)
-    guestroom['Humidity(%)'] = pd.to_numeric(guestroom['Humidity(%)'], errors='coerce')
+    guestroom[var] = pd.to_numeric(guestroom[var], errors='coerce')
     guestroom.dropna(inplace=True)
+    
+    #'''
     out.replace("--", np.nan, inplace=True)
     out['Temperature(F)'] = pd.to_numeric(out['Temperature(F)'], errors='coerce')
-    out.dropna(inplace=True)
-
+    out.dropna(inplace=True)    
+    #'''
+    
     # Convert the 'Time' column to datetime format
     guestroom['Time'] = pd.to_datetime(guestroom['Time'], format="%m/%d/%y %H:%M")
     out['Time'] = pd.to_datetime(out['Time'], format="%m/%d/%y %H:%M")
@@ -32,16 +41,17 @@ def plot(start_date, end_date, write):
     guestroom, out = load_data(start_date, end_date)
     fig, ax1 = plt.subplots()
 
-    ax1.plot(guestroom["Time"], guestroom["Humidity(%)"], '-', label="Guestroom Absolute Humidity [g/m^3]", color="tab:purple")
+    ax1.plot(guestroom["Time"], guestroom[var], '-', label=f"Guestroom {var}", color="tab:purple")
     ax1.set_xlabel("Date and Time")
-    ax1.set_ylabel("Guestroom Absolute Humidity [g/m^3]", color="tab:purple")
+    ax1.set_ylabel(f"Guestroom {var}", color="tab:purple")
 
     # Create a secondary y-axis
     ax2 = ax1.twinx()
     ax2.plot(out["Time"], out["Temperature(F)"], '-', label="Deh(out) Temperature [F]", color="tab:orange")
     ax2.set_ylabel("Deh(out) Temperature [F]", color="tab:orange")
 
-    plt.title(f"Guestroom Absolute Humidity and Deh(out) Temperature Vs. Time (hourly)  {start_date}")
+    #plt.title(f"Guestroom Absolute Humidity and Deh(out) Temperature Vs. Time (hourly)  {start_date}")
+    plt.title(f"Guestroom {var} Vs. Time (hourly)  {start_date}")
 
     ax1.xaxis.set_major_locator(mdates.HourLocator(interval=2))
     ax1.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
@@ -63,7 +73,6 @@ def plot(start_date, end_date, write):
         print(f"Plot saved as '{plot_filename}'")
     
     plt.show()
-
 
 if __name__ == '__main__':
 
@@ -211,21 +220,21 @@ if __name__ == '__main__':
     ]
     
     test = [
-        ('1/15/19', '1/16/19')]
-
-    #for start_date, end_date in date_ranges1:
-        #print()
-        #plot(start_date, end_date, 'N')
-
+        ('5/23/20', '5/24/20')]
     
+    for start_date, end_date in date_ranges1:
+        print(f"\nPlotting for {start_date} to {end_date}")
+        plot(start_date, end_date, 'N')
+
+    '''
     date_ranges2 = pd.date_range(start='1/15/19', end='1/18/19', freq='D')
     date_ranges3 = pd.date_range(start='10/9/19', end='11/4/23', freq='D')
     
-    for date in date_ranges2:
+    for date in date_ranges3:
         start_date = date.strftime('%m/%d/%y')
         end_date = (date + pd.Timedelta(days=1)).strftime('%m/%d/%y')
         
         print(f"\nPlotting for {start_date} to {end_date}")
         plot(start_date, end_date, 'N')
     
-    
+    '''
