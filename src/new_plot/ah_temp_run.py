@@ -74,16 +74,15 @@ def plot(start_date, end_date, write):
     fig.tight_layout()
 
     if write == 'Y':
-        start_date_str = pd.to_datetime(start_date, format='%m/%d/%y').strftime('%#m/%#d/%y')
+        start_date_str = pd.to_datetime(start_date, format='%m/%d/%y %H:%M').strftime('%#m/%#d/%y')
         start_date_str = start_date_str.replace('/', '_')
-        plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\Guestroom AH Deh(out) Temp & Front AH Vs. Time\{start_date_str}_GuestHum_n_Temp@Deh_Out_vs_Time.png'
+        plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\Guestroom AH Deh(out) Temp & Front AH Vs. Time\Time&BucketEmpty\{start_date_str}_AH(Base & Front)_Temp(Oulet)_vs_Time.png'
         
         # Save the figure directly
         fig.savefig(plot_filename, dpi=300)
 
         print(f"Plot saved as '{plot_filename}'")
-
-    plt.show()
+    #plt.show()
 
 if __name__ == '__main__':
 
@@ -126,7 +125,7 @@ if __name__ == '__main__':
     
     for start_date, end_date in runtime:
         print(f"\nPlotting for {start_date} to {end_date}")
-        plot(start_date, end_date, 'N')
+        plot(start_date, end_date, 'Y')
 
     '''
     date_ranges2 = pd.date_range(start='1/15/19', end='1/18/19', freq='D')
