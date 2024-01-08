@@ -64,7 +64,7 @@ def plot(start_date, end_date, write):
 if __name__ == '__main__':
 
     date_ranges1 = pd.date_range(start='1/15/19', end='1/18/19', freq='D')
-    date_ranges2 = pd.date_range(start='10/9/19', end='11/4/23', freq='D')
+    date_ranges2 = pd.date_range(start='6/9/23', end='11/4/23', freq='D')
     
     for date in date_ranges2:
         start_date = date.strftime('%m/%d/%y')
