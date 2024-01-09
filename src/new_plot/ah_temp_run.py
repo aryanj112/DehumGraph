@@ -46,16 +46,20 @@ def plot(start_date, end_date, write):
     ax1.plot(out["Time"], out["Temperature(F)"], '-', label="Deh(out) Temperature [F]", color="tab:orange")
     ax1.set_ylabel("Deh(out) Temperature [F]", color="tab:orange")
     ax1.set_xlabel("Date and Time")
+    ax1.set_ylim(bottom=70)  # Set the minimum y-axis limit to 0 for the first subplot
 
     ax2 = ax1.twinx()
     ax2.plot(guestroom["Time"], guestroom[var], '-', label=f"Guestroom {var}", color="tab:purple")
     ax2.set_ylabel(f"Guestroom {var}", color="tab:purple")
+    #ax2.set_ylim(bottom=0)  # Set the minimum y-axis limit to 0 for the second subplot
+    ax2.set_ylim(bottom=0, top=15)  # Set both minimum and maximum y-axis limits for the first subplot
 
     ax3 = ax1.twinx()
     ax3.spines['right'].set_position(('outward', 60))  # Place ax3 to the right of ax1
     ax3.plot(front["Time"], front["Absolute Humidity(g/m^3)"], '-', label=f"Front Absolute Humidity(g/m^3)", color="tab:blue")
     ax3.set_ylabel(f"Front Absolute Humidity(g/m^3)", color="tab:blue")
-
+    ax3.set_ylim(bottom=0, top=30) 
+    
     plt.title(f"Deh(Out) Temp Guest AH & Front AH Vs. Time {start_date} - {end_date}")
 
     ax1.xaxis.set_major_locator(mdates.HourLocator(interval=4))
@@ -76,7 +80,7 @@ def plot(start_date, end_date, write):
     if write == 'Y':
         start_date_str = pd.to_datetime(start_date, format='%m/%d/%y %H:%M').strftime('%#m/%#d/%y')
         start_date_str = start_date_str.replace('/', '_')
-        plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\Guestroom AH Deh(out) Temp & Front AH Vs. Time\Time&BucketEmpty\{start_date_str}_AH(Base & Front)_Temp(Oulet)_vs_Time.png'
+        plot_filename = fr'C:\Users\ajayj\DehumGraph\plots\Guestroom AH Deh(out) Temp & Front AH Vs. Time\Zeroed\{start_date_str}_AH(Base & Front)_Temp(Oulet)_vs_Time.png'
         
         # Save the figure directly
         fig.savefig(plot_filename, dpi=300)
@@ -121,9 +125,9 @@ if __name__ == '__main__':
     #Come back to work on 7/20/23 12:00
 
     test = [
-        ('5/23/20', '5/24/20')]
+        ('6/27/23 10:00', '6/28/23 1:00')]
     
-    for start_date, end_date in runtime:
+    for start_date, end_date in test:
         print(f"\nPlotting for {start_date} to {end_date}")
         plot(start_date, end_date, 'Y')
 
