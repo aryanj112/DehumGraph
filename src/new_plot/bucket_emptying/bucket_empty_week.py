@@ -65,7 +65,7 @@ def load_data(start_date, end_date):
     print (front)
     return guestroom, out, front
 
-def plot(start_date, end_date, write):
+def plot(start_date, end_date, write, bucket_lines_jaunt):
     guestroom, out, front = load_data(start_date, end_date)
 
     fig, ax1 = plt.subplots(figsize=(12, 6))
@@ -78,7 +78,6 @@ def plot(start_date, end_date, write):
     ax2 = ax1.twinx()
     ax2.plot(guestroom["Time"], guestroom[var], '-', label=f"Guestroom {var}", color="tab:purple")
     ax2.set_ylabel(f"Guestroom {var}", color="tab:purple")
-    #ax2.set_ylim(bottom=0)  # Set the minimum y-axis limit to 0 for the second subplot
     ax2.set_ylim(bottom=0, top=15)  # Set both minimum and maximum y-axis limits for the first subplot
 
     ax3 = ax1.twinx()
@@ -87,19 +86,33 @@ def plot(start_date, end_date, write):
     ax3.set_ylabel(f"Front Absolute Humidity(g/m^3)", color="tab:blue")
     ax3.set_ylim(bottom=0, top=30) 
     
+    # Combine handles and labels for legend
+    handles, labels = ax1.get_legend_handles_labels()
+    handles2, labels2 = ax2.get_legend_handles_labels()
+    handles3, labels3 = ax3.get_legend_handles_labels()
+    handles.extend(handles2)
+    handles.extend(handles3)
+    labels.extend(labels2)
+    labels.extend(labels3)
+    
+    for line_date in bucket_lines_jaunt:
+        ax1.axvline(x=line_date, color='r', linestyle='--', linewidth=1, label='Bucket Empty Date')
+
     plt.title(f"Deh(Out) Temp Guest AH & Front AH Vs. Time {start_date} - {end_date}")
 
-    ax1.xaxis.set_major_locator(mdates.HourLocator(interval=4))
-    ax1.xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))  # Adjust the format as needed
+    ax1.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))
+
+# Set the maximum number of ticks for better visibility
+    ax1.xaxis.set_major_locator(plt.MaxNLocator(7))  # You can adjust the maximum number of ticks as needed
 
     # Rotate the x-axis labels for better visibility
     for tick in ax1.get_xticklabels():
         tick.set_rotation(45)
         tick.set_ha('right')
 
-    # Show legends for both axes
-    ax1.legend(loc="upper left")
-    ax2.legend(loc="upper right")
+    # Show single legend for all axes
+    fig.legend(handles, labels, loc='upper left', bbox_to_anchor=(0.85, 0.85))
 
     # Manually adjust layout before saving
     fig.tight_layout()
@@ -116,7 +129,13 @@ def plot(start_date, end_date, write):
     plt.show()
 
 if __name__ == '__main__':
+    # Choose the start date you want to filter by
+    chosen_start_date = pd.to_datetime('2021-04-15 00:00')  # Replace with your desired start date
 
     for start_date, end_date, bucket_lines in bucket_empty_list:
-        print(f"\nPlotting for {start_date} to {end_date}")
-        plot(start_date, end_date, 'N')
+        # Check if the current start date is after the chosen start date
+        if start_date >= chosen_start_date:
+            print(f"\nPlotting for {start_date} to {end_date}")
+            plot(start_date, end_date, 'N', bucket_lines)
+        else:
+            print(f"Skipping {start_date} as it is before the chosen start date.")
