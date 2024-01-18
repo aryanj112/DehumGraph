@@ -1,7 +1,7 @@
 import ah_conversion as abs
 import pandas as pd
 
-data_frame = pd.read_csv(r'C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_Combine.csv')
+data_frame = pd.read_csv(r'C:\Users\ajayj\DehumGraph\data\Frontdoor_NEW.CSV')
 
 # Calculate absolute humidity for each row and add it to a new column
 abs_hum_values = []
@@ -15,5 +15,5 @@ for index, row in data_frame.iterrows():
 data_frame['Absolute Humidity(g/m^3)'] = abs_hum_values
 
 # Write the updated DataFrame back to a new CSV file
-output_csv_path = r'C:\Users\ajayj\DehumGraph\data\ambient_weather\Base(guest)\CH7A_Absolute_NEW.csv'
+output_csv_path = r'C:\Users\ajayj\DehumGraph\data\Frontdoor_NEW_ABS.csv'
 data_frame.to_csv(output_csv_path, index=False)
